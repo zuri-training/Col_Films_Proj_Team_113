@@ -107,4 +107,23 @@ git push origin main
 
 **Note**: Ensure you always switch to your own branch and not the `main` branch before you make any changes to be committed. **Do not** commit directly to the `main` branch.
 
+## Pushing new changes
+
+If you have made new changes which you want to commit to the upstream repo, follow the steps:
+
+1. Update changes to be committed
+```sh
+git add .
+```
+2. Enter a commit message
+```sh
+git commit -m 'your-commit-message'
+```
+3. Push your commit
+```sh
+git push
+```
+
+Now go to your fork repo and click on `Compare & pull request` button. Enter the necessary information you wish to add to your pull request and click on `Create pull request` button and wait for your commits to be merged.
+
 _This guide will constantly be updated, please create an issue if you have any difficulty following the guide._
