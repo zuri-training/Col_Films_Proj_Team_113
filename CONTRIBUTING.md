@@ -107,4 +107,29 @@ git push origin main
 
 **Note**: Ensure you always switch to your own branch and not the `main` branch before you make any changes to be committed. **Do not** commit directly to the `main` branch.
 
+## Pushing new changes and keeping it in sync with remote
+
+If you have made new changes which you want to commit to the upstream repo, follow the steps:
+
+1. Update changes to be committed
+```sh
+git add .
+```
+2. Enter a commit message
+```sh
+git commit -m 'your-commit-message'
+```
+3. Push your commit
+```sh
+git push
+```
+Follow the steps mentioned earlier above on how to submit your PR, then after it has been merged, sync the upstream changes with your remote with the following commands:
+
+```sh
+$ git fetch upstream
+$ git checkout main
+$ git merge upstream/main
+$ git push origin main
+```
+
 _This guide will constantly be updated, please create an issue if you have any difficulty following the guide._
