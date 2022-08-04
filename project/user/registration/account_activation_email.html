@@ -1,0 +1,22 @@
+{% load i18n %}
+
+{% blocktrans %}Hello{% endblocktrans %} {% if user.get_full_name %}{{ user.get_full_name }}{% else %}{{ user }}{% endif %},
+
+{% blocktrans %}
+You are receiving this email because you (or someone pretending to be you)
+have asked to register an account on {{ domain }}. If you do not
+wish to register for an account with us, please ignore this message.
+{% endblocktrans %}
+
+{% blocktrans %}
+To activate your account, please click the following link, or copy and paste it
+into your web browser:
+{% endblocktrans %}
+
+{{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+{% blocktrans %}Best regards{% endblocktrans %},
+
+{{ site_name }} {% blocktrans %}Management{% endblocktrans %}
+
+{{ protocol }}://www.footystory.com
