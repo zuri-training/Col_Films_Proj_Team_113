@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    max-width: 1400px;
+}
+
+#container {
+    background-color: #000a12;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.back-btn {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+}
+
+.vidhut-logo {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+main {
+    background-color: #2B333A;
+    padding: 10px;
+    left: 400px;
+    top: 120px;
+    border-radius: 8px;
+}
+
+main .top-text {
+    color: #EFF7FA;
+    font-weight: 600;
+}
+
+main .top-intro {
+    color: #EFF7FA;
+    font-weight: 600;
+}
+
+main p {
+    color: #EFF7FA;
+}
+
+main .enter-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+
+}
+
+main .enter-code .form-control {
+    border: none;
+    background: none;
+    border: 1px solid #EFF7FA;
+    border-radius: 10px;
+    height: 35px;
+    width: 30px;
+    margin: 4px;
+    text-align: center;
+    color: #EFF7FA;
+}
+
+main .enter-code .form-control:focus {
+    border: none;
+    background: none;
+    border: 1px solid #EFF7FA;
+    outline: none;
+    box-shadow: none;
+}
+
+main .countdown-text {
+    color: #EFF7FA;
+    margin-top: -20px;
+    margin-left: -25px;
+    font-size: .5rem;
+}
+
+main .verify {
+    padding: 16px 32px;
+    width: 80%;
+    background-color: #BCE6AD;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #BCE6AD;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 1.1rem;
+}
+
+main .verify a {
+    font-style: normal;
+    text-decoration: none;
+    color: #000A12;
+}
+
+main .verify:hover {
+    border: 1px solid #90B4C0;
+    background-color: #9DC090;
+    cursor: pointer;
+}
+
+main .verify:active {
+    background-color: #7D9973;
+}
+
+main .verify:disabled {
+    background-color: rgba(188, 230, 173, 0.4);
+}
+
+main .no-verification {
+    text-align: center;
+    margin-top: 40px;
+    color: #EFF7FA;
+    margin-bottom: 20px;
+}
+
+main .no-verification span a {
+    color: #ADD8E6;
+    font-style: normal;
+    text-decoration: none;
+}
+
+@media (min-width:700px) {
+    
+    main .enter-code .form-control {
+        height: 45px;
+        width: 40px;
+        margin: 10px;
+    }
+
+    main .countdown-text {
+        margin-top: -25px;
+        margin-left: -60px;
+        font-size: .7rem;
+
+    }
+}
