@@ -1,45 +1,34 @@
-from django.shortcuts import  render, redirect
-from .forms import NewUserForm, SignUpForm, UserForm
-from django.contrib.auth import login, authenticate, logout #add this
-from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
-from . models import CustomUser
-from django.contrib import messages
-from django.contrib.auth import login, get_user_model, logout
-from django.contrib.sites.shortcuts import get_current_site
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponseBadRequest, JsonResponse
-from django.views.decorators.http import require_POST
-from django.shortcuts import render, redirect, get_object_or_404
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.conf import settings
-from .decorators import ajax_required
+from django.contrib import messages
+from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.exceptions import PermissionDenied
+from django.http import (HttpResponse, HttpResponseBadRequest, HttpResponseRedirect,
+                         JsonResponse)
+from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_str
+from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.views.decorators.http import require_POST
+
+from .forms import ViewerSignUpForm
+from .models import User
 from .tokens import account_activation_token
 
 
-def homepage(request):
-	User = CustomUser.objects.all() #queryset containing all books we just created
-	return render(request=request, template_name="main/home.html", context={'user':User})
-
-
-def signup(request):
-    if request.user.is_authenticated():
-        return redirect('home')
+def viewer_signup(request):
+    if request.user.is_authenticated:
+        return redirect('core:home')
     
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
+        form = ViewerSignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             # User shouldn't log in before confirming email
             user.is_active = False
-            user.save()
-            # Load profile instance created by the signal
-            user.refresh_from_db()
-            user.profile.favorite_club = form.cleaned_data.get('favorite_club')
+            user.is_viewer = True
             user.save()
             current_site = get_current_site(request)
 
@@ -63,14 +52,14 @@ def signup(request):
                  'token': account_activation_token.make_token(user),}
             )
             user.email_user(subject, message)
-            return redirect('account_activation_sent')
+            return redirect('accounts:account_activation_sent')
         else:
             messages.error(request, "An error occured while trying to create your account.")
             return render(request,
                 'registration/signup.html',
                 {'form': form})
     else:
-        form = SignUpForm()
+        form = ViewerSignUpForm()
 
     template = 'registration/signup.html'
     context = {
@@ -81,8 +70,8 @@ def signup(request):
 
 
 def account_activation_sent(request):
-    if request.user.is_authenticated():
-        return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('core:home')
 
     template = 'registration/account_activation_sent.html'
     context = {}
@@ -92,20 +81,27 @@ def account_activation_sent(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
-        user.profile.email_confirmed = True
+        user.email_verified = True
         user.save()
-        login(request, user)
+        login(request, user, backend='accounts.authentication.EmailAuthBackend')
         messages.success(request, 'Your profile has been successully created.')
-        return redirect('home')
+        return redirect('core:home')
     else:
         return render(
             request,
             'registration/activate.html',
             {})
   
+
+def password_reset_options(request):
+
+    template = 'registration/password_reset_options.html'
+    context = {}
+
+    return render(request, template, context)

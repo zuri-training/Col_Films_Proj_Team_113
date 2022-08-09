@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Account Activation Email Sent" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-block">
+
+    <div class="form-block-content">
+
+        <h4>{% trans "Account Activation Email Sent" %}</h4>
+
+        <hr class="line-separator">
+
+        <p class="highlighted">
+            {% trans "Before you can login, you must activate your account with the code sent to your email address to complete the registration process." %}
+        </p>
+        <p class="highlighted">
+            {% trans "If you did not receive this email in your primary mail folder, please check your junk/spam folder." %}
+        </p>
+        <p class="highlighted">
+            {% trans "If you entered an incorrect email address, you will need to re-register with the correct email address." %}
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

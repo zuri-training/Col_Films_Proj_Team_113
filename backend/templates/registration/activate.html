@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Account Activation Failed" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-block">
+
+    <div class="form-block-content">
+
+        <h4 class="text-danger">{% trans "Account Activation Failed" %}</h4>
+
+        <hr class="line-separator">
+
+        <p class="highlighted">
+            {% trans "This account activation link is invalid, possibly because it has already been used or it may have incorrectly been copied from your email." %}
+        </p>
+        <p class="highlighted">{% trans "Please request for a new activation link" %} <a href=""
+                class="primary">{% trans "here" %}</a>.</p>
+        <p class="highlighted">{% trans "Thank you." %}</p>
+
+    </div>
+
+</div>
+
+{% endblock %}
