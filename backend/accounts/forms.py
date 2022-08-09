@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model 
 from django.core.validators import RegexValidator
 from django.utils.translation import gettext_lazy as _
-from django.db import transaction
 
 User = get_user_model()
 
