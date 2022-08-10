@@ -12,7 +12,7 @@ https://www.figma.com/proto/tNI2fUodbSyrhaBGbOxiV9/Col-films-designs?node-id=244
 https://www.figma.com/proto/tNI2fUodbSyrhaBGbOxiV9/Col-films-designs?node-id=2443%3A16623&scaling=scale-down
 https://www.figma.com/proto/tNI2fUodbSyrhaBGbOxiV9/Col-films-designs?node-id=2443%3A16899&scaling=scale-down
 
-ALSO THERE ARE CONTRIBUTIONS ON THE LANDING PAGE: FEATURES, FAQs, FOOTER, HOW TO UPLOAD
+ALSO THERE ARE CONTRIBUTIONS ON THE LANDING PAGE: FEATURES, FAQs, FOOTER, HOW TO UPLOAD,i worked on all the designs while @tesapowers worked on the ux writing of FAQs and @stella worked as UX writer for how to upload
 https://www.figma.com/proto/tNI2fUodbSyrhaBGbOxiV9/Col-films-designs?node-id=2450%3A15359&scaling=scale-down&page-id=1%3A2
 
 I ALSO CARRIED OUT THE USER RESEARCHES WITH MY TEAM MEMBERS AND WORKED ON ALL THERE IS TO DO WITH RESEARCHES FROM PROBLEM STATEMENT DEFINITION TO USER FLOW, I WAS INVOLVED IN ALL PROCESSES.
