@@ -12,13 +12,32 @@ from .utils import generate_random_id
 class User(AbstractUser):
     """User model."""
 
+#     email = models.EmailField(_('email address'),
+#                               unique=True)
+#     username = models.CharField(max_length=150, unique=True)
+#     first_name = models.CharField(max_length=150, blank=True)
+#     is_active = models.BooleanField(default=False)
+
+# class CustomAccountManager(BaseUserManager):
+#     # username = models.TextField(unique=True)
+#     # email = models.EmailField(unique=True)
+
+#     def create_superuser(self, email, username, password, **other_fields):
+
+#         other_fields.setdefault('is_staff', True)
+#         other_fields.setdefault('is_superuser', True)
+#         other_fields.setdefault('is_active', True)
+
+#         if other_fields.get('is_staff') is not True:
+#             raise ValueError('Superuser must be assigned to is_staff=True')
+    
+    
+        
+class CustomUser(AbstractUser):
     username = None
-    email = models.EmailField(_('email address'),
-                             unique=True)
-    email_verified = models.BooleanField(
-		_('email verified?'),
-		default=False,
-		help_text="Determine if the User's email has been verified.")
+    email = models.EmailField(unique=True)
+    slug = models.SlugField(blank=True, unique=True)
+
     is_viewer = models.BooleanField(default=False)
     is_creator = models.BooleanField(default=False)
 
