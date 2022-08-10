@@ -135,13 +135,4 @@ LOGIN_REDIRECT_URL = 'core:home'
 
 LOGOUT_REDIRECT_URL = 'core:home'
 
-AUTH_USER_MODEL = 'accounts.User'
-
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'accounts.authentication.EmailAuthBackend',
-]
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+AUTH_USER_MODEL = 'accounts.CustomUser'
