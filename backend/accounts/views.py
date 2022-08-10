@@ -1,5 +1,7 @@
+
+
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, SignUpForm, UserForm
+from .forms import NewUserForm, SignUpForm
 from django.contrib.auth import login, authenticate, logout #add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -9,16 +11,15 @@ from django.contrib.auth import login, get_user_model, logout
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, JsonResponse
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes, force_text
+from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.conf import settings
-from .decorators import ajax_required
 from .tokens import account_activation_token
+
 
 
 def homepage(request):
@@ -27,7 +28,7 @@ def homepage(request):
 
 
 def signup(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return redirect('home')
     
     if request.method == 'POST':
@@ -72,7 +73,7 @@ def signup(request):
     else:
         form = SignUpForm()
 
-    template = 'registration/signup.html'
+    template = 'accounts/register.html'
     context = {
         'form': form
     }

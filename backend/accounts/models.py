@@ -32,7 +32,7 @@ from .utils import generate_random_id
     
         
 class CustomUser(AbstractUser):
-    username = None
+    username = models.TextField(unique=True)
     email = models.EmailField(unique=True)
     slug = models.SlugField(blank=True, unique=True)
 
