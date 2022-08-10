@@ -29,27 +29,16 @@ urlpatterns = [
           auth_views.PasswordResetCompleteView.as_view(),
           name='password_reset_complete'),
 
-<<<<<<< HEAD
-    path('', views.homepage, name='homepage'),
-    path("register", views.signup, name="register"),
-    # path("login", views.login_request, name="login"),
-    # path("logout", views.logout_request, name= "logout"),
-=======
-     # Registration
-     # path('vendor/signup/', views.vendor_signup, name='vendor_signup'),
-     path('viewer/signup/', views.viewer_signup, name='viewer_signup'),
-
-     path('activation/sent/',
-        views.account_activation_sent,
-        name='account_activation_sent'),
-
-     path('activate/<uidb64>/<token>/',
-        views.activate, 
-        name='activate'),
+    # Registration
+    # path('vendor/signup/', views.vendor_signup, name='vendor_signup'),
+    # path('customer/signup/', views.customer_signup, name='customer_signup'),
 
      # path("register", views.register_request, name="register"),
      # path("login", views.login_request, name="login"),
      # path("logout", views.logout_request, name= "logout"),
+<<<<<<< HEAD
+>>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7
+=======
 >>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7
         
 ]

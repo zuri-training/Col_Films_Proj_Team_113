@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-
-
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, SignUpForm
+from .forms import NewUserForm, SignUpForm, UserForm
 from django.contrib.auth import login, authenticate, logout #add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -22,40 +19,14 @@ from django.conf import settings
 from .tokens import account_activation_token
 
 
-
 def homepage(request):
 	User = CustomUser.objects.all() #queryset containing all books we just created
 	return render(request=request, template_name="main/home.html", context={'user':User})
 
 
 def signup(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated():
         return redirect('home')
-=======
-from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth import authenticate, get_user_model, login, logout
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.exceptions import PermissionDenied
-from django.http import (HttpResponse, HttpResponseBadRequest, HttpResponseRedirect,
-                         JsonResponse)
-from django.shortcuts import get_object_or_404, redirect, render, reverse
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes, force_str
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.views.decorators.http import require_POST
-
-from .forms import ViewerSignUpForm
-from .models import User
-from .tokens import account_activation_token
-
-
-def viewer_signup(request):
-    if request.user.is_authenticated:
-        return redirect('core:home')
->>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7
     
     if request.method == 'POST':
         form = ViewerSignUpForm(request.POST)

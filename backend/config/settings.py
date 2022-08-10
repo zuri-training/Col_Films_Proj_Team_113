@@ -135,26 +135,4 @@ LOGIN_REDIRECT_URL = 'core:home'
 
 LOGOUT_REDIRECT_URL = 'core:home'
 
-<<<<<<< HEAD
 AUTH_USER_MODEL = 'accounts.CustomUser'
-
-# SMTP CONFIGURATION
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "barrerkat.gmail.com"
-EMAIL_HOST_PASSWORD = 'Macplenty@1998'
-=======
-AUTH_USER_MODEL = 'accounts.User'
-
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'accounts.authentication.EmailAuthBackend',
-]
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
->>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7

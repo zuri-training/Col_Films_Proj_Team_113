@@ -12,7 +12,6 @@ from .utils import generate_random_id
 class User(AbstractUser):
     """User model."""
 
-<<<<<<< HEAD
 #     email = models.EmailField(_('email address'),
 #                               unique=True)
 #     username = models.CharField(max_length=150, unique=True)
@@ -35,19 +34,10 @@ class User(AbstractUser):
     
         
 class CustomUser(AbstractUser):
-    username = models.TextField(unique=True)
+    username = None
     email = models.EmailField(unique=True)
     slug = models.SlugField(blank=True, unique=True)
 
-=======
-    username = None
-    email = models.EmailField(_('email address'),
-                             unique=True)
-    email_verified = models.BooleanField(
-		_('email verified?'),
-		default=False,
-		help_text="Determine if the User's email has been verified.")
->>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7
     is_viewer = models.BooleanField(default=False)
     is_creator = models.BooleanField(default=False)
 
