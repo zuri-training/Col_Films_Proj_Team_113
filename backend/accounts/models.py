@@ -1,15 +1,18 @@
+from hashlib import blake2b
 from random import random
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 
-from .managers import CustomUserManager
+from .managers import UserManager
 from .utils import generate_random_id
 
 
-# class UserBase(AbstractBaseUser, PermissionsMixin):
+class User(AbstractUser):
+    """User model."""
 
+<<<<<<< HEAD
 #     email = models.EmailField(_('email address'),
 #                               unique=True)
 #     username = models.CharField(max_length=150, unique=True)
@@ -36,13 +39,22 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
     slug = models.SlugField(blank=True, unique=True)
 
+=======
+    username = None
+    email = models.EmailField(_('email address'),
+                             unique=True)
+    email_verified = models.BooleanField(
+		_('email verified?'),
+		default=False,
+		help_text="Determine if the User's email has been verified.")
+>>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7
     is_viewer = models.BooleanField(default=False)
     is_creator = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    objects = CustomUserManager()
+    objects = UserManager()
 
     class Meta:
         ordering = ['email']
@@ -52,33 +64,16 @@ class CustomUser(AbstractUser):
         """String representation for the User model"""
         return self.email
 
-    def generate_random_slug(self):
-        random_slug = slugify(self.first_name + self.last_name + generate_random_id())
-            
-        while CustomUser.objects.filter(slug=random_slug).exists():
-            random_slug = slugify(self.first_name + self.last_name + generate_random_id())
-        return random_slug
-
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = self.generate_random_slug()
-
-        super().save(*args, **kwargs)
-
 
 class Viewer(models.Model):
     """ Model for storing a viewer instance. """
     user = models.OneToOneField(
-        CustomUser,
+        User,
         on_delete=models.CASCADE,
         null=True,
         related_name='viewer')
-    company_name = models.CharField(max_length=50)
-    address = models.CharField(max_length=600)
-    about = models.TextField()
-    state = models.CharField(max_length=10)
-    image = models.ImageField(upload_to='viewer/images')
-    is_verified = models.BooleanField(default=False)
+    about = models.TextField(blank=True)
+    image = models.ImageField(upload_to='viewer/images', blank=True)
 
     def __str__(self):
         return f"{self.user.username} profile"
@@ -87,10 +82,12 @@ class Viewer(models.Model):
 class Creator(models.Model):
     """Model for storing a creator instance"""
     user = models.OneToOneField(
-        CustomUser,
+        User,
         on_delete=models.CASCADE,
         null=True,
         related_name='creator')
+    about = models.TextField()
+    image = models.ImageField(upload_to='creator/images')
 
     def __str__(self):
         return f"{self.user.username} profile"
