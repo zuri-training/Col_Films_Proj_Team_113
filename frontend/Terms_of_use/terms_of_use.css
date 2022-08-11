@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    padding: 10px 20px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.title{
+    font-size: 48px;
+    font-weight: 700;
+}
+p, ul>li{
+    font-size: 20px;
+    font-style:normal ;
+    font-weight: 400;
+    line-height: 32px;
+}
+ol{
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33.6px;
+}
+.agree{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 160%;
+}
+.button{
+    width: 106px;
+    height: 54px;
+    background-color: #BCE6AD;
+    border-radius: 8px;
+    padding: 16px 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    /* line-height: 24px; */
+    text-align: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #000A12;
+    cursor: pointer;
+}
+.button:hover{
+    background-color:#6fba54;
+    color: #000A12;
+
+}
+
+@media (min-width: 360px) and (max-width: 542px) {
+    .content{
+        height: 910px;
+        width: 428px;
+    }
+    .title{
+        font-size: 24px;
+    }
+    ol{
+        font-size: 18px;
+    }
+    p, ul>li{
+        font-size: 16px;
+    }
+    .agree{
+        font-size: 14px;
+    }
+}
