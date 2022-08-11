@@ -1,1 +1,0 @@
-The designs for the website should be saved within this folder
