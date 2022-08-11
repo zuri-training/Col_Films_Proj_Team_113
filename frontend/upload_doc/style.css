@@ -1,27 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
 *{
+    font-family: 'Montserrat';
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    color:#EFF7FA;
 }
 body{
-    background-image: url(images/image\ _9.svg);
+    background-image: url(images/image\ 19.png);
     background-size: cover;
     background-repeat: no-repeat;
 }
-header{
+
+nav 
+{
+    display: inline;
+    float: right;
     padding: 10px 20px;
+    margin: 24px;
 }
 .content{
-    height: 550px;
+    width: 603px;
+    height: 610px;
+    background: #2B333A;
+    padding: 100px 69px;
+    gap: 43px;
+    font-size: 20px;
+    border-radius: 8px;
+    margin-top: 180px;
+    margin-bottom: 180px;
+}
+
+.doc-content{
+    width: 603px;
+    height: 459px;
     background: #2B333A;
     padding: 100px 69px;
     gap: 53px;
     font-size: 20px;
     border-radius: 8px;
+    margin-top: 180px;
+    margin-bottom: 180px;
 }
 .photo_box{
-    width: 602px;
-    height: 520px;
+    width: 400px;
+    height: 502px;
 }
 .title{
     font-size: 40px;
@@ -40,11 +63,33 @@ header{
     font-style: normal;
     line-height: 24px;
     text-align: center;
-    gap: 8px;
+    gap: 8px !important;
     text-decoration: none;
     color: #000A12;
     cursor: pointer;
 }
+.button-sec{
+    width: 464px;
+    height: 54px;
+    background-color: inherit;
+    border-color: hwb(104 68% 10%);
+    border: 1px solid #BCE6AD;
+    border-radius: 8px;
+    padding: 16px 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 24px;
+    text-align: center;
+    gap: 8px !important;
+    text-decoration: none;
+    color: #000A12;
+    cursor: pointer;
+    text-decoration: none;
+    color: #BCE6AD;
+}
+
 .button:hover{
     background-color:#9DC090;
     color: #000A12;
@@ -57,6 +102,42 @@ header{
 .button:disabled{
     background-color: #BCE6AD;
     opacity: 0.4;
+}
+
+.button-sec:hover{
+    background-color: #90B4C0;
+    border: 1px solid #90B4C0;
+    color: #000A12;
+
+
+}
+.button-sec:active{
+    background-color: #739099;
+
+}
+.button-sec:disabled{
+    background-color: inherit;
+    border: 1px solid #9DC090;
+    opacity: 0.4;
+}
+
+label{
+    width: 464px;
+    height: 54px;
+    background-color: #BCE6AD;
+    border-color: hwb(104 68% 10%);
+    border-radius: 8px;
+    padding: 16px 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 24px;
+    text-align: center;
+    gap: 8px !important;
+    text-decoration: none;
+    color: #000A12;
+    cursor: pointer;
 }
 @media (min-width: 360px) and (max-width: 542px) {
     .content{

@@ -1,15 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
 *{
+    font-family: 'Montserrat';
+    color: #EFF7FA;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 
 header{
     padding: 10px 20px;
 }
 .content{
     display: flex;
+    gap: 30px;
     flex-direction: column;
     justify-content: center;
 }
@@ -51,9 +55,17 @@ ol{
     cursor: pointer;
 }
 .button:hover{
-    background-color:#6fba54;
+    background-color:#9DC090;
     color: #000A12;
 
+}
+.button:active{
+    background-color: #7D9973;
+
+}
+.button:disabled{
+    background-color: #BCE6AD;
+    opacity: 0.4;
 }
 
 @media (min-width: 360px) and (max-width: 542px) {

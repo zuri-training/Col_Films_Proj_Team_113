@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+*{font-family: 'Montserrat';justify-content: center; align-items: center;}
+
+body {
+    background: #000A12;
+    font-family: 'Montserrat';
+    color: #EFF7FA;
+    font-size: small;
+    font-style: normal;
+}
+
+h2 {
+    /* Headings/Heading 2 */
+    text-align: center;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 28px; 
+    line-height: 49px;
+}
+h3{
+    font-weight: 700 !important;
+}
+
+h4{
+    font-weight: 600;
+}
+.form-control{
+    border: 1px solid; 
+    background-color: #2B333A; 
+    color: #BCE6AD; 
+} 
+
+p{
+ font-weight: 400 !important;
+ color: #EFF7FA;
+ font-size: 18px;
+ line-height: 160%;
+ font-style: normal;
+}
+.form-control:focus
+{
+    background-color: #2B333A; 
+    border: 1px ; border-color: #BCE6AD; 
+    color: #EFF7FA; 
+    box-shadow: none; 
+    transition: none !important;  
+    outline: none !important;
+}
+
+.wrapper {
+    background-color: #2B333A; 
+    box-sizing: border-box;
+    text-align: center;
+    padding: 40px 70px;
+    box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(45px);
+    border-radius: 8px;
+}
+
+
+.mail {
+    display: inline-block;
+    text-align: center;
+    margin-right: 8px;
+    font-weight: bolder;
+}
+
+/*button forgot password page*/
+.button{
+    background-color: inherit; 
+    font-weight: 400; 
+    font-size: 16px; 
+    color: #BCE6AD;
+    border:  1px solid #BCE6AD; 
+    box-shadow: none; width: 100%; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 10px; 
+    margin-bottom: 15px;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.button1{
+    background-color: inherit; 
+    font-weight: 400; 
+    font-size: 16px; 
+    border:  1px solid #739099; 
+    box-shadow: none; width: 100%; 
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 10px; 
+    margin-bottom: 15px;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+input.btn1{
+    color: #EFF7FA;
+}
+
+.button1:focus{
+    border:  1px solid #90B4C0;
+}
+
+.btn1-head{
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: left;
+}
+
+/*styling for primary button including active states*/
+.btn2{
+    background-color: #BCE6AD;
+    border-color: hwb(104 68% 10%);
+    color: #000A12;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+button.prim:hover{
+    background-color: #9DC090;
+}
+
+button.prim:active{
+    background-color: #7D9973;
+}
+
+button.prim:disabled{
+    background-color: #BCE6AD;
+    opacity: 0.4;
+}
+
+/*styling for secondary button including active states*/
+.btn3{
+    border-color: #BCE6AD;
+    color: #BCE6AD;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+button.sec:hover{
+    background-color: #90B4C0;
+    border-color: #90B4C0;
+    
+    color: #000A12;
+}
+
+button.sec:active{
+    background-color: #739099;
+    border-color: #739099;
+    color: #000A12;
+}
+
+button.sec:disabled{
+    background-color: #BCE6AD;
+    border-color: #BCE6AD;
+    color: #BCE6AD;
+    opacity: 0.4;
+}
+
+/*remove decoration from ahref tags*/
+a {
+  text-decoration: none;  
+}
+
+/* code for horizontal lines besides text */
+
+div.optn {
+   text-align: center;
+   margin: 12px auto;
+   max-width: 600px;
+   position: relative;
+}
+
+div.optn::before {
+    content: "";
+    display: flex;
+    width: 100px;
+    height: 1px;
+    background: #C0C0C0;
+    opacity: 0.5;
+    position: absolute;
+    left: 0%;
+    top: 50%; 
+}
+
+div.optn:after {
+    content: "";
+    display: flex;
+    width: 100px;
+    height: 1px;
+    position: absolute;
+    background: #C0C0C0;
+    opacity: 0.5;
+    right: 0%;
+    top: 50%; 
+}
+
+
+span a {
+    color: #ADD8E6;
+    font-weight: lighter;
+}
+
+p.sign {
+    text-align: center;
+}
+
+p.check{
+    font-size: 13px;
+}
+div.mb-3{
+    text-align: left;
+}
+
+input[type=submit]:focus{
+    outline: 3px solid #7D9973;
+}
+
+
+.was-validated .form-control:invalid {
+    border-color: #dc3545; 
+    padding-right: calc(1.5em + 0.75rem); 
+    background-image: url(Vector.png); 
+    background-repeat: no-repeat; 
+    background-position: right calc(0.375em + 0.1875rem) center; 
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+:hover.needs-validation .was-validated .form-control:invalid a {color: #dc3545;}
+:hover .invalid-feedback{color: #dc3545;}
+.form-check-input:checked {background-color: #198754; border-color: #198754; border: 0px; box-shadow: none;}
+.form-check-input:valid~.form-check-label {color: #198754;}
+.was-validated .form-check-input:valid~.form-check-label {color: white;}
+.form-check-input:valid~.form-check-label {color: white;}
+:hover.form-check-input:valid~.form-check-label {color: white;}
+:focus .form-check-input:valid~.form-check-label {color: white;}
+.was-validated.form-check-input:invalid~.form-check-label {color: #dc3545;}
+:hover.was-validated.form-check-input:invalid~.form-check-label {color: #dc3545;}
+.fgp{position: relative; margin-left: 30%; margin-top: 15px;}
+:hover.fgp{color: white;}
+form i {float: right; margin-right: 20px; margin-top: -30px; position: relative; z-index: 2; cursor: pointer;}
