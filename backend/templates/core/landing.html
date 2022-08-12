@@ -1,0 +1,306 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to VidHut</title>
+    <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar vidhut__bg-grey navbar-expand-lg">
+            <div class="container">
+                <!-- Logo -->
+                <a class="navbar-brand me-5" href="{% url 'core:home' %}">
+                    <img src="{% static 'images/logo.png' %}" alt="VidHut">
+                </a>
+                <!-- Navbar Toggler -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link {% url 'core:home' as home_url %}{% if request.get_full_path == home_url %}vidhut__nav-active{% else %}vidhut__text-white{% endif %} me-4" href="{% url 'core:home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4 vidhut__text-white" href="#features">Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4 vidhut__text-white" href="#howto">How To</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4 vidhut__text-white" href="#categories">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4 vidhut__text-white" href="#contact">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-nav ms-auto">
+                        <a href="{% url 'accounts:signup_choice' %}" class="btn vidhut__button-primary mb-1">Sign up</a>
+                        <a href="{# url 'accounts:signup' #}" class="btn vidhut__button-secondary mb-1">Tour hut</a>
+                        <a href="{% url 'accounts:login' %}" class="btn vidhut__button-secondary mb-1 me-lg-0">Log in</a>
+                    </div>
+                </div>
+            </div>
+        </nav> <!-- End Navbar -->
+
+        <!-- Hero -->
+        <div class="container hero">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">
+                    <h1 class="mb-5">Find amazing entertainment in your hut now!</h1>
+                </div>
+                <div class="col-md-8 text-center">
+                    <h4 class="mb-5">You are just a click away from uploading, viewing and sharing films with students
+                        just like you</h4>
+                    <a class="btn vidhut__button-primary fs-5" href="{# url 'accounts:signup' #}">Join hut</a>
+                </div>
+            </div>
+        </div> <!-- End Hero -->
+    </header>
+
+    <!-- Features -->
+    <section class="vidhut__bg-dark" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title">Our amazing features</h2>
+                    <p class="section-description">Your needs and wants are our prioirity. Stay entertained always with
+                        our magnificent features that gives you the best and most unique experience you can ever get on
+                        a streaming platform.</p>
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="row">
+                    <div class="col-md-6 me-5">
+                        <img class="img-fluid" src="{% static 'images/feature-1.jpg' %}" alt="">
+                    </div>
+                    <div class="col-md-5 pt-5">
+                        <h3>Love to create contents</h3>
+                        <p>Upload your videos and reach a wide range of audience consisting of college students and the
+                            rest of the world.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="row">
+                    <div class="col-md-5 pt-5">
+                        <h3>Stream and download</h3>
+                        <p>The entertainment never stops. With data turned on or off, watch and download amazing content
+                            in your hut.</p>
+                    </div>
+                    <div class="col-md-6 ms-5">
+                        <img class="img-fluid" src="{% static 'images/feature-2.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-row">
+                <div class="row">
+                    <div class="col-md-6 me-5">
+                        <img class="img-fluid" src="{% static 'images/feature-3.jpg' %}" alt="">
+                    </div>
+                    <div class="col-md-5 pt-5">
+                        <h3>Join a community</h3>
+                        <p>Want to bant and interact with your fellow content creator and college students? We have just
+                            the hut for you.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!--How to upload-->
+    <section class="vidhut__bg-grey" id="howto">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title">How to upload</h2>
+                    <p class="section-description">Are you a creator in university? Do you have videos to share to your
+                        university folks and the rest of the world. Upload a video on Vidhut in 5 easy steps.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 d-flex justify-content-between">
+                    <div class="badge rounded-pill">
+                        <h5>1</h5>
+                    </div>
+                    <div class="col howtoupload">
+                        <img class="img-fluid mb-3" src="{% static 'images/how-to-1.jpg' %}" alt="Create account">
+                        <p class="text-center">Create account</p>
+                    </div>
+                    <div class="badge rounded-pill">
+                        <h5>2</h5>
+                    </div>
+                    <div class="col howtoupload">
+                        <img class="img-fluid mb-3" src="{% static 'images/how-to-2.jpg' %}" alt="Choose niche">
+                        <p class="text-center">Choose niche</p>
+                    </div>
+                    <div class="badge rounded-pill">
+                        <h5>3</h5>
+                    </div>
+                    <div class="col howtoupload me-0">
+                        <img class="img-fluid mb-3" src="{% static 'images/how-to-3.jpg' %}" alt="">
+                        <p class="text-center">Verify Email</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-9 d-flex justify-content-center offset-lg-2">
+                    <div class="badge rounded-pill">
+                        <h5>4</h5>
+                    </div>
+                    <div class="col howtoupload">
+                        <img class="img-fluid mb-3" src="{% static 'images/how-to-4.jpg' %}" alt="Scan school ID card">
+                        <p class="text-center">Scan school ID card</p>
+                    </div>
+                    <div class="badge rounded-pill">
+                        <h5>5</h5>
+                    </div>
+                    <div class="col howtoupload">
+                        <img class="img-fluid mb-3" src="{% static 'images/how-to-5.jpg' %}" alt="Upload video">
+                        <p class="text-center">Upload video</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="vidhut__bg-dark" id="categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-title">Tour diverse categories</h2>
+                    <p class="section-description">At Vidhut, we offer you various categories to browse videos from,
+                        tour and find your hut.</p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-3 card p-4">
+                    <img class="img-fluid mb-3" src="{% static 'images/category-music.jpg' %}" alt="">
+                    <h4><a href="category.html" class="text-decoration-none text-white">Music</a></h4>
+                    <p class="card-text">Stay up to date with the latest music trends </p>
+                </div>
+                <div class="col-md-3 card p-4">
+                    <img class="img-fluid mb-3" src="{% static 'images/category-comedy.jpg' %}" alt="">
+                    <h4><a href="category.html" class="text-decoration-none text-white">Comedy</a></h4>
+                    <p class="card-text">Laugh to the pit of your stomach</p>
+                </div>
+                <div class="col-md-3 card p-4">
+                    <img class="img-fluid mb-3" src="{% static 'images/category-film.jpg' %}" alt="">
+                    <h4><a href="category.html" class="text-decoration-none text-white">Film</a></h4>
+                    <p class="card-text">Drama unlimited, keeping you glued to your screen</p>
+                </div>
+                <div class="col-md-3 card p-4">
+                    <img class="img-fluid mb-3" src="{% static 'images/category-poetry.jpg' %}" alt="">
+                    <h4><a href="category.html" class="text-decoration-none text-white">Poetry</a></h4>
+                    <p class="card-text">Stay up to date with the latest music trends</p>
+                </div>
+                <div class="col-md-3 card p-4">
+                    <img class="img-fluid mb-3" src="{% static 'images/category-tutorial.jpg' %}" alt="">
+                    <h4><a href="category.html" class="text-decoration-none text-white">Tutorial</a></h4>
+                    <p class="card-text">Laugh to the pit of your stomach</p>
+                </div>
+                <div class="col-md-3 card p-4">
+                    <img class="img-fluid mb-3" src="{% static 'images/category-anime.jpg' %}" alt="">
+                    <h4><a href="category.html" class="text-decoration-none text-white">Anime</a></h4>
+                    <p class="card-text">Drama unlimited, keeping you glued to your screen</p>
+                </div>
+                <a class="mt-4 btn see-more" href="javascript:void(0)">More categories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="vidhut__bg-dark" id="contact">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-lg-12 text-center">
+                    <h3 class="section-title">Contact Customer Service</h3>
+                    <p class="section-description">Need help, clarification or anything in-between?</p>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-3 vidhut__bg-grey vidhut__rounded-border p-5 mx-5 mb-3">
+                    <img src="{% static 'images/call.png' %}" alt="Call us">
+                    <h4 class="ms-3 d-inline">Call us</h4>
+                    <p class="mt-3 mb-0 fs-5">+234 701 4300 630</p>
+                    <p class="fs-5">+234 701 2345 689</p>
+                </div>
+                <div class="col-md-3 vidhut__bg-grey vidhut__rounded-border p-5 mx-5 mb-3">
+                    <img src="{% static 'images/call.png' %}" alt="chatlive">
+                    <h4 class="ms-3 d-inline">Chat live</h4>
+                    <p class="mt-3 fs-5">We're available <br>
+                        8am-8pm <br>Monday-Saturday</p>
+                </div>
+                <div class="col-md-3 vidhut__bg-grey vidhut__rounded-border p-5 mx-5 mb-3">
+                    <img src="{% static 'images/call.png' %}" alt="visitus">
+                    <h4 class="ms-3 d-inline">Visit us</h4>
+                    <p class="mt-3 fs-5">
+                        18 Tolu Crescent <br>
+                        off Mali street, <br>
+                        Emmanuella Ave.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="vidhut__bg-grey">
+        <div class="container py-4 px-4">
+            <div class="row">
+                <div class="col-lg-6 col-md col-sm col-12 mb-5">
+                    <img src="{% static 'images/logo.png' %}" alt="logo">
+                    <h4 class="ms-3 d-inline vidhut__text-white">Vidhut Inc. 2022</h4>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Explore</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="FAQs">FAQs</a></li>
+                        <li><a href="#only">Only on Vidhut</a></li>
+                        <li><a href="#explore">Explore contents</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#terms">Terms of use</a></li>
+                        <li><a href="Howto">How to upload</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact us</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#mediacenter">Media center</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'scripts/app.js' %}"></script>
+</body>
+
+</html>

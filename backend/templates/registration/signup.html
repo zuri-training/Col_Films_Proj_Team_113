@@ -1,60 +1,50 @@
 {% extends "registration/base.html" %}
+
 {% block title %}Create an account{% endblock %}
 
-{% block form_content %}
-<div class="form-card">
-    <h1>Create an account</h1>
+{% block content %}
+<h1 class="head pt-2">Become A Creator</h1>
+<p class="py-2 mb-3">Get started by uploading your videos in the hut.</p>
 
-    <form method="post" action="" novalidate class="needs-validation">
-        {% csrf_token %}
-        {% include 'partials/_form_errors.html' %}
-        {# form.as_p #}
-
-        <div class="mb-3">
-            <label class="form-label" for="id_email">Email address</label>
-            <input type="email" name="email" autofocus autocapitalize="none" maxlength="254"
-                placeholder="Enter your email" class="form-control {% if form.email.errors %}is-invalid{% endif %}"
-                required id="id_email"
-                {% if form.email.value != None %}value="{{ form.email.value|stringformat:'s' }}" {% endif %}>
-            {% for error in form.email.errors %}
-            <div class="invalid-feedback">
-                {{ error }}
-            </div>
-            {% endfor %}
+    
+<form method="post" action="" class="needs-validation">
+    {% csrf_token %}
+    {% include 'partials/_form_errors.html' %}
+    
+    <div class="mb-3"> 
+        <label for="id_email" class="form-label">Email:</label> 
+        <input type="email" name="email" maxlength="254" autofocus class="form-control {% if form.email.errors %}is-invalid{% endif %}" required id="id_email" placeholder="Enter your email" {% if form.email.value != None %}value="{{ form.email.value|stringformat:'s' }}" {% endif %}> 
+        {% for error in form.email.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
         </div>
+        {% endfor %}
+    </div>
 
-        <div class="mb-3">
-            <label for="id_password1" class="form-label">Password:</label>
-            <input type="password" name="password1" autocomplete="new-password" required id="id_password1"
-                class="form-control {% if form.password1.errors %}is-invalid{% endif %}" placeholder="******">
-            <i class="bi bi-eye-slash" id="togglePassword"></i>
-            {% for error in form.password1.errors %}
-            <div class="invalid-feedback">
-                {{ error }}
-            </div>
-            {% endfor %}
+    <div class="mb-3"> 
+        <label for="id_password1" class="form-label">Password:</label> 
+        <input type="password" name="password1" autocomplete="new-password" class="form-control {% if form.password1.errors %}is-invalid{% endif %}" placeholder="Enter Password" required id="id_password1">
+        {% for error in form.password1.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
         </div>
+        {% endfor %}
+    </div>
 
-        <div class="mb-3">
-            <label for="id_password2" class="form-label">Confirm Password:</label>
-            <input type="password" name="password2" autocomplete="new-password" required id="id_password2"
-                class="form-control {% if form.password2.errors %}is-invalid{% endif %}" placeholder="******">
-            <i class="bi bi-eye-slash" id="togglePassword"></i>
-            {% for error in form.password2.errors %}
-            <div class="invalid-feedback">
-                {{ error }}
-            </div>
-            {% endfor %}
+    <div class="mb-3">
+        <label for="id_password2" class="form-label">Password confirmation:</label>
+        <input type="password" name="password2" autocomplete="new-password"
+            class="form-control {% if form.password2.errors %}is-invalid{% endif %}" placeholder="Confirm Password" required id="id_password2">
+        {% for error in form.password2.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
         </div>
+        {% endfor %}
+    </div>
 
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="id_rememberme">
-            <label class="form-check-label" for="id_rememberme"><small>By clicking on create an account means you are agreeing with our Terms of service and our Privacy Policy<small></label>
-        </div>
+    <button class="btn submit my-3" type="submit">Register</button>
+    
+    <p class="text-center">Already have an account? <a href="{% url 'accounts:login' %}" class="text-white">Login</a></p>
+</form>
 
-        <button type="submit" class="btn">Create your account</button>
-        <p>Already have an account? <a href="{% url 'accounts:login' %}" class="log">Login</a></p>
-    </form>
-</div>
-
-{% endblock form_content %}
+{% endblock content %}

@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-image: url('../images/bg-image.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #EFF7FA;
+    max-width: 100%;
+    width: 100%;
+
+
+}
+
+.vidhut-logo {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+
+main {
+
+    max-width: 500px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+}
+
+
+.main-container {
+    border-radius: 8px;
+    background-color: #2B333A;
+    padding: 50px;
+}
+
+.main-container h1 {
+    font-weight: 700;
+    font-size: 1.8rem;
+}
+
+.main-container p {
+    font-weight: lighter;
+    font-size: .9rem;
+
+}
+
+#InputEmail {
+    background-color: #2B333A;
+    color: #EFF7FA;
+    font-size: .7rem;
+    height: 38px;
+    border: 1px solid #EFF7FA;
+
+}
+
+#InputEmail:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #EFF7FA;
+}
+
+#password {
+    background-color: #2B333A;
+    color: #EFF7FA;
+    font-size: .7rem;
+    height: 38px;
+    border: 1px solid #EFF7FA;
+}
+
+#password:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #EFF7FA;
+}
+
+#togglePassword {
+    position: absolute;
+    margin-left: 320px;
+    margin-top: 6px;
+}
+
+#DateOfBirth {
+    background-color: #2B333A;
+    color: #EFF7FA;
+    font-size: .7rem;
+    height: 38px;
+    border: 1px solid #EFF7FA;
+}
+
+#DateOfBirth:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid #EFF7FA;
+}
+
+select {
+    background-color: #2B333A;
+    color: #EFF7FA;
+    padding: 10px;
+    font-size: .8rem;
+    height: 38px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #EFF7FA;
+
+}
+
+select:focus {
+    outline: none;
+}
+
+#Check {
+    background-color: #2B333A;
+    border-color: #EFF7FA;
+    box-shadow: none;
+}
+
+.form-check-label {
+    font-size: .49rem;
+}
+
+.main-container .submit,
+.main-container .submit a {
+    font-size: .8rem;
+    background-color: #BCE6AD;
+    padding: 15px;
+    width: 100%;
+    font-weight: 700;
+    border: none;
+    text-decoration: none;
+    color: #000A12;
+
+
+}
+
+.main-container .submit:hover,
+.main-container .submit a:hover {
+    background-color: #9DC090;
+}
+
+.main-container .submit:active,
+.main-container .submit a:active {
+    background-color: #7D9973;
+    box-shadow: none;
+}
+
+.main-container .submit:disabled,
+.main-container .submit a:disabled {
+    background-color: rgba(188, 230, 173, 0.4);
+    color: rgba(0, 10, 18, 0.4);
+    ;
+
+}
+
+
+
+
+
+/*Media-Query*/
+
+
+@media screen and (max-width: 1200px) {
+    main {
+        margin-top: 380px;
+    }
+
+
+
+    @media screen and (max-width: 950px) {
+        main {
+            margin-top: 370px;
+
+        }
+
+    }
+
+    @media screen and (max-width: 850px) {
+        main {
+            margin-top: 320px;
+        }
+    }
+
+    @media screen and (max-width: 780px) {
+        main {
+            margin-top: 250px;
+        }
+    }
+
+    @media screen and (max-width: 700px) {
+        main {
+            margin-top: 180px;
+        }
+    }
+
+    @media screen and (max-width: 540px) {
+        main {
+            margin-top: 165px;
+        }
+
+        #togglePassword {
+            position: absolute;
+            margin-left: 280px;
+            margin-top: 6px;
+        }
+    }
+
+    @media screen and (max-width: 450px) {
+
+        #togglePassword {
+            position: absolute;
+            margin-left: 230px;
+            margin-top: 6px;
+        }
+
+    }
+
+    @media screen and (max-width: 375px) {
+        main {
+            margin-top: 95px;
+        }
+
+        #togglePassword {
+            position: absolute;
+            margin-left: 200px;
+            margin-top: 6px;
+        }
+
+    }
+
+    @media screen and (max-width: 325px) {
+
+
+        #togglePassword {
+            position: absolute;
+            margin-left: 160px;
+            margin-top: 6px;
+        }
+
+    }
+}
