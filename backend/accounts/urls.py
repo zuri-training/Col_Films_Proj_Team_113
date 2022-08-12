@@ -13,8 +13,14 @@ urlpatterns = [
           auth_views.LoginView.as_view(
                redirect_authenticated_user=True), name='login'),
 
-     # path('password_reset/',
-     #      views.password_reset_options, name='password_reset_options'),
+     # Account activation
+     path('activation/sent/',
+        views.account_activation_sent,
+        name='account_activation_sent'),
+
+     path('activate/<uidb64>/<token>/',
+        views.activate, 
+        name='activate'),
 
      # password reset with email
      path('password_reset/', 
@@ -30,15 +36,7 @@ urlpatterns = [
           name='password_reset_complete'),
 
     # Registration
-    # path('vendor/signup/', views.vendor_signup, name='vendor_signup'),
+    path('signup/choice/', views.signup_choice, name='signup_choice'),
+    path('creator/signup/', views.creator_signup, name='creator_signup'),
     # path('customer/signup/', views.customer_signup, name='customer_signup'),
-
-     # path("register", views.register_request, name="register"),
-     # path("login", views.login_request, name="login"),
-     # path("logout", views.logout_request, name= "logout"),
-<<<<<<< HEAD
->>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7
-=======
->>>>>>> 632c1b53797fdcb26614ed3a36944f4accf851b7
-        
 ]

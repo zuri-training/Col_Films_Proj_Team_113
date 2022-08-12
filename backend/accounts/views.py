@@ -1,9 +1,9 @@
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, SignUpForm, UserForm
+from .forms import CreatorSignUpForm, ViewerSignUpForm
 from django.contrib.auth import login, authenticate, logout #add this
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from . models import CustomUser
+from . models import User
 from django.contrib import messages
 from django.contrib.auth import login, get_user_model, logout
 from django.contrib.sites.shortcuts import get_current_site
@@ -19,22 +19,24 @@ from django.conf import settings
 from .tokens import account_activation_token
 
 
-def homepage(request):
-	User = CustomUser.objects.all() #queryset containing all books we just created
-	return render(request=request, template_name="main/home.html", context={'user':User})
+def signup_choice(request):
+
+    template = 'registration/signup_choice.html'
+    context = {}
+
+    return render(request, template, context)
 
 
-def signup(request):
-    if request.user.is_authenticated():
-        return redirect('home')
+def creator_signup(request):
+    if request.user.is_authenticated:
+        return redirect('core:home')
     
     if request.method == 'POST':
-        form = ViewerSignUpForm(request.POST)
+        form = CreatorSignUpForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            # User shouldn't log in before confirming email
             user.is_active = False
-            user.is_viewer = True
+            user.is_creator = True
             user.save()
             current_site = get_current_site(request)
 
@@ -65,9 +67,9 @@ def signup(request):
                 'registration/signup.html',
                 {'form': form})
     else:
-        form = ViewerSignUpForm()
+        form = CreatorSignUpForm()
 
-    template = 'accounts/register.html'
+    template = 'registration/signup.html'
     context = {
         'form': form
     }
@@ -87,7 +89,7 @@ def account_activation_sent(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_str(urlsafe_base64_decode(uidb64))
+        uid = force_bytes(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except (TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
@@ -103,11 +105,3 @@ def activate(request, uidb64, token):
             request,
             'registration/activate.html',
             {})
-  
-
-def password_reset_options(request):
-
-    template = 'registration/password_reset_options.html'
-    context = {}
-
-    return render(request, template, context)

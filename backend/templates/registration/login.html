@@ -1,47 +1,43 @@
 {% extends "registration/base.html" %}
 {% block title %}Login to your account{% endblock %}
 
-{% block form_content %}
-<div class="form-card">
-    <h1>Welcome back!</h1>
+{% block content %}
 
-    <form method="post" action="" novalidate class="needs-validation">
-        {% csrf_token %}
-        {% include 'partials/_form_errors.html' %}
-        
-        <div class="mb-3">
-            <label class="form-label" for="id_username">Email address</label>
-            <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="254"
-                placeholder="Enter your email" class="form-control {% if form.username.errors %}is-invalid{% endif %}" required
-                id="id_username" {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}" {% endif %}>
-            {% for error in form.username.errors %}
-            <div class="invalid-feedback">
-                {{ error }}
-            </div>
-            {% endfor %}
+<h1 class="head pt-2">Welcome back!</h1>
+<p class="py-2 mb-3">Hop in for a full access to our site</p>
+
+<form method="post" action="" class="needs-validation">
+    {% csrf_token %}
+    {% include 'partials/_form_errors.html' %}
+    
+    <div class="mb-3">
+        <label class="form-label" for="id_username">Email address</label>
+        <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="254"
+            placeholder="Enter your email" class="form-control {% if form.username.errors %}is-invalid{% endif %}" required
+            id="id_username" {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}" {% endif %}>
+        {% for error in form.username.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
         </div>
-        
-        <div class="mb-3">
-            <label for="id_password" class="form-label">Password:</label>
-            <input type="password" name="password" autocomplete="current-password" required id="id_password"
-                class="form-control {% if form.password.errors %}is-invalid{% endif %}" placeholder="******">
-            <i class="bi bi-eye-slash" id="togglePassword"></i>
-            {% for error in form.password.errors %}
-            <div class="invalid-feedback">
-                {{ error }}
-            </div>
-            {% endfor %}
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        <a href="{% url 'accounts:password_reset' %}" class="float-end text-white"><small>Forgot Password?</small></a>
+        <label for="id_password" class="form-label">Password:</label>
+        <input type="password" name="password" autocomplete="current-password" required id="id_password"
+            class="form-control {% if form.password.errors %}is-invalid{% endif %}" placeholder="******">
+        {% for error in form.password.errors %}
+        <div class="invalid-feedback">
+            {{ error }}
         </div>
+        {% endfor %}
+    </div>
 
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="id_rememberme">
-            <label class="form-check-label" for="id_rememberme"><small>Remember me<small></label>
-            <a href="{% url 'accounts:password_reset' %}" class="fgp">Forgot Password?</a>
-        </div>
+    <button class="btn submit my-3" type="submit">Log in</button>
 
-        <button type="submit" class="btn">Log in</button>
-        <p>Don't have an account? <a href="{% url 'accounts:viewer_signup' %}" class="log">Sign up</a></p>
-    </form>
-</div>
+    <p class="text-center">Don't have an account? <a href="{% url 'accounts:signup_choice' %}" class="text-white">Sign up</a>
+    </p>
+</form>
 
-{% endblock form_content %}
+{% endblock content %}
