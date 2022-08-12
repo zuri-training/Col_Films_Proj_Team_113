@@ -3,10 +3,15 @@
 {% block title %}Choose user type{% endblock title %}
 
 {% block content %}
-<h1 class="head pt-2">Choose a User type</h1>
-<p class="py-2 mb-3">You can either sign up as a creator if you are a college student or as a viewer if you only want to stream movies.</p>
+<div class="wrapper p-5">
 
+    <h2>Choose a User type</h2>
+    <p class="py-2 mb-3">You can either sign up as a creator if you are a college student or as a viewer if you only want to stream movies.</p>
 
-<a href="{% url 'accounts:creator_signup' %}" class="btn submit text-center mb-3">Signup as a Creator</a>
-<a href="{# url 'accounts:viewer_signup' #}" class="btn submit text-center">Signup as a Viewer</a>
+<a href="{% url 'accounts:creator_signup' %}" class="btn button-primary">Signup as a
+    Creator</a>
+<a href="{% url 'accounts:creator_signup' %}" class="btn button-primary">Signup as a Viewer</a>
+
+</div>
+
 {% endblock content %}

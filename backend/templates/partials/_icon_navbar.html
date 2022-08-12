@@ -19,12 +19,12 @@
 <div class="l-navbar" id="nav-bar">
     <nav class="nav">
         <div>
-            <div class="text-center text-white"><a href="index.html" class="nav_logo"><img
+            <div class="text-center text-white"><a href="{% url 'core:home' %}" class="nav_logo"><img
                         src="{% static 'images/Group 1.png' %}" alt=""></a>Home</div><br>
 
-            <div class="nav_list"> <a href="#" class="nav_link active"> <img src="{% static 'images/Explore.png' %}"
+            <div class="nav_list"> <a href="{# url 'core:explore' #}" class="nav_link active"> <img src="{% static 'images/Explore.png' %}"
                         alt=""> </a> <a href="#" class="nav_link"> <img src="{% static 'images/Vector (2).png' %}"
-                        alt=""></a> <a href="#" class="nav_link"> <img src="{% static 'images/Vector (3).png' %}"
+                        alt=""></a> <a href="{# url 'community' #}" class="nav_link"> <img src="{% static 'images/Vector (3).png' %}"
                         alt=""> </a> <a href="#" id="v-pills-tab" class="nav_link"> <img
                         src="{% static 'images/setting-2.png' %}" alt=""> </a> </div>
         </div class=""> <a href="#" class="nav_link privacy-policy">Privacy <br>Policy</a>

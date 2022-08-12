@@ -1,29 +1,26 @@
-{% extends "base.html" %}
+{% extends "registration/base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}{% trans "Account Activation Email Sent" %}{% endblock %}
 
 {% block content %}
 
-<div class="form-block">
+<div class="wrapper p-5">
 
-    <div class="form-block-content">
-
-        <h4>{% trans "Account Activation Email Sent" %}</h4>
-
-        <hr class="line-separator">
-
-        <p class="highlighted">
-            {% trans "Before you can login, you must activate your account with the code sent to your email address to complete the registration process." %}
-        </p>
-        <p class="highlighted">
-            {% trans "If you did not receive this email in your primary mail folder, please check your junk/spam folder." %}
-        </p>
-        <p class="highlighted">
-            {% trans "If you entered an incorrect email address, you will need to re-register with the correct email address." %}
-        </p>
-
+    <img src="{% static 'images/sms-notification.svg' %}" alt="">
+    
+    <h3 class="mt-5">{% trans "Account Activation Email Sent" %}</h3>
+    <p class="mt-3">We have sent an account verification link to your email. You must verify your account before you can login.</p>
+    <div class="mt-3">
+        <a href="https://mail.google.com/mail/" target="_blank">
+            <button class="btn button-primary">Open email app</button>
+        </a>
     </div>
+    <p class="check mt-3">
+        Didn't receive the email? You can
+        <span><a href="{# url 'accounts:resend_activation' #}">resend activation link</a></span>
+    </p>
 
 </div>
 

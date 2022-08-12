@@ -97,9 +97,8 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.email_verified = True
         user.save()
-        login(request, user, backend='accounts.authentication.EmailAuthBackend')
         messages.success(request, 'Your profile has been successully created.')
-        return redirect('core:home')
+        return redirect('accounts:login')
     else:
         return render(
             request,
