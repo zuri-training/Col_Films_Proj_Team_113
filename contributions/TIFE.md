@@ -10,10 +10,7 @@ I implemented sign up form for creators for phone and email while also using the
 2. FRONT END DEVELOPMENT OF FORGOT PASSWORD (EMAIL) & VERIFICATION PAGE 
 https://github.com/zuri-training/Col_Films_Proj_Team_113/issues/3
 
+3. Front end developent of notifications page
+https://github.com/zuri-training/Col_Films_Proj_Team_113/issues/72
 
-+ Framework Used:
-Bootstrap
 
-+ Languanges Used:
-JavaScript
-HTML5 and CSS3
