@@ -1,0 +1,33 @@
+{% load static %}
+
+<header class="header" id="header">
+    <div class="header_toggle">
+        <img src="{% static 'images/menu.png' %}" id="header-toggle"></img>
+    </div>
+    <input type="search" class="search" placeholder="Enter your search" aria-label="Search">
+    <div>
+        <img src="{% static 'images/user.png' %}">
+    </div>
+    <a href="">
+        <img class="notification" src="{% static 'images/Notification.png' %}" alt="image">
+    </a>
+    <a class="btn upload" href="{% url 'videos:create' %}">
+        <img src="{% static 'images/Upload.png' %}" placeholder="Upload" alt="">
+    </a>
+    </div>
+</header>
+<div class="l-navbar" id="nav-bar">
+    <nav class="nav">
+        <div>
+            <div class="text-center text-white"><a href="index.html" class="nav_logo"><img
+                        src="{% static 'images/Group 1.png' %}" alt=""></a>Home</div><br>
+
+            <div class="nav_list"> <a href="#" class="nav_link active"> <img src="{% static 'images/Explore.png' %}"
+                        alt=""> </a> <a href="#" class="nav_link"> <img src="{% static 'images/Vector (2).png' %}"
+                        alt=""></a> <a href="#" class="nav_link"> <img src="{% static 'images/Vector (3).png' %}"
+                        alt=""> </a> <a href="#" id="v-pills-tab" class="nav_link"> <img
+                        src="{% static 'images/setting-2.png' %}" alt=""> </a> </div>
+        </div class=""> <a href="#" class="nav_link privacy-policy">Privacy <br>Policy</a>
+</div>
+</nav>
+</div>

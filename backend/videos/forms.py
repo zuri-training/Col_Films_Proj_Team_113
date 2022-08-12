@@ -24,4 +24,4 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ['subject', 'content', 'rating']
+        fields = ['body']
