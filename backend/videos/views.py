@@ -4,8 +4,9 @@ from core.utils import mk_paginator
 from django.utils.text import slugify
 from django.contrib import messages
 from moviepy.editor import VideoFileClip
+from django.core.files.uploadedfile import UploadedFile
 from .forms import VideoUploadForm
-from .models import Video
+from .models import Video, Category
 
 
 # def video_list(request, category_slug=None):
@@ -28,6 +29,12 @@ from .models import Video
 
 #     return render(request, template_name, context)
 
+def convert(seconds):
+    hours = seconds // 3600
+    seconds %= 3600
+    mins = seconds // 60
+    seconds %= 60
+    return f'{mins}:{seconds}'
 
 @login_required
 def video_create(request):
@@ -44,26 +51,37 @@ def video_create(request):
             request, 'Only creators are allowed to upload a video.')
         return redirect('core:home')
     
+    categories = Category.objects.all()
+    
     if request.method == 'POST':
         form = VideoUploadForm(request.POST, request.FILES)
         if form.is_valid():
             video = form.save(commit=False)
             video.user = request.user
             video.slug = slugify(video.title)
-            video.save()
-            # video.refresh_from_db()
-            # clip = VideoFileClip(video.video_file.name)
-            # video.video_length = clip.duration
-            # video.save()
-            messages.success(
-                request, "Your video has been successfully created.")
-            return redirect(video.get_absolute_url())
+            
+            vid = request.FILES['video_file']
+            clip = VideoFileClip(vid.temporary_file_path())
+            temp_length = int(clip.duration)
+            if temp_length > 600:
+                length_error = 'Film Is Longer Than 15 Minutes'
+                return render(
+                    request, 'videos/video_create.html',
+                    {'form':form, 'length_error':length_error})
+            elif temp_length <= 600:
+                video.video_length = convert(int(clip.duration))
+                video.save()
+                return redirect(video.get_absolute_url())
+        else:
+           messages.warning(
+                request, "An error occured, check below.") 
     else:
         form = VideoUploadForm()
 
     template = 'videos/video_create.html'
     context = {
         'form': form,
+        'categories': categories,
     }
 
     return render(request, template, context)
@@ -107,6 +125,7 @@ def video_create(request):
 #     return render(request, template_name, context)
 
 
+@login_required
 def video_detail(request, slug):
     """
     Video detail.
@@ -126,9 +145,13 @@ def video_detail(request, slug):
         video.save()
         request.session[session_key] = True
 
+    similar_videos = Video.objects.filter(
+        category=video.category).exclude(id=video.id)
+
     template = 'videos/video_detail.html'
     context = {
         'video': video,
+        'similar_videos': similar_videos,
     }
 
     return render(request, template, context)

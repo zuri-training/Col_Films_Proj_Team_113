@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.core.validators import FileExtensionValidator
 from django.utils.translation import gettext as _
 
 # from PIL import Image
@@ -67,9 +68,12 @@ class Video(models.Model):
                             unique=True)
     video_file = models.FileField(verbose_name=_('Video file'),
                                   upload_to='videos',
+                                  validators=[FileExtensionValidator(['mp4'])],
                                   help_text=_('Path to the uploaded video.'))
     thumbnail = models.ImageField(verbose_name=_('thumbnail'),
                                   upload_to='thumbnails',
+                                  validators=[FileExtensionValidator(
+                                    ["jpg", "jpeg", "png", "webp"])],
                                   help_text=_('An image that will be used as a thumbnail.'))
     description = models.TextField(verbose_name=_('description'),
                                    max_length=1000,
@@ -143,7 +147,7 @@ class Comment(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='user_comments')
-    body = models.TextField()
+    body = models.TextField(_('body'))
     created = models.DateTimeField(
         auto_now_add=True)
     active = models.BooleanField(
