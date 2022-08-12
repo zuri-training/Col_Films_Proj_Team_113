@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #000A12;
+    max-width: 100%;
+    width: 100%;
+
+}
+
+.vidhut-logo {
+    outline: none;
+    border: none;
+    position: absolute;
+
+}
+
+main {
+    height: 100vh;
+
+
+}
+
+.container {
+    background-color: #2B333A;
+    border-radius: 6px;
+    padding: 10px;
+    margin: auto;
+
+
+
+}
+
+.header {
+    color: #EFF7FA;
+    font-size: 1.3rem;
+    width: 100%;
+}
+
+.cancel-icon {
+
+    box-shadow: none;
+    text-align: right;
+
+
+
+}
+
+.notification-bar {
+    background-color: #555C61;
+    width: 100%;
+    border-radius: 6px;
+    padding: 3px;
+}
+
+.img-btn {
+    box-shadow: none;
+}
+
+.notification-detail {
+    color: #EFF7FA;
+    font-size: .8rem;
+    margin: auto;
+    font-weight: lighter;
+    width: 100%;
+
+}
+
+.time-stamp {
+    margin: auto;
+    color: #BCE6AD;
+    font-size: .8rem;
+    width: 19%;
+
+}
+
+.date-stamp {
+    margin: auto;
+    color: #EFF7FA;
+    font-size: .8rem;
+    white-space: nowrap;
+    width: 15%;
+
+
+}
+
+@media screen and (max-width: 580px) {
+
+    .time-stamp,
+    .date-stamp {
+        position: absolute;
+        top: -20px;
+    }
+}
