@@ -142,3 +142,5 @@ AUTH_USER_MODEL = 'accounts.User'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 0

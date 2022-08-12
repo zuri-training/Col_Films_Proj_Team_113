@@ -55,6 +55,9 @@
         </div>
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {% if length_error %}
+            <h1>{{length_error}}</h1>
+            {% endif %}
             {{ form.as_p }}
             <div class="row">
                 <div class="d-flex justify-content-center mt-3">
