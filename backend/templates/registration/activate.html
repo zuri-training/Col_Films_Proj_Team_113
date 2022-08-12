@@ -1,27 +1,21 @@
-{% extends "base.html" %}
+{% extends "registration/base.html" %}
 {% load i18n %}
+{% load static %}
 
 {% block title %}{% trans "Account Activation Failed" %}{% endblock %}
 
 {% block content %}
 
-<div class="form-block">
+<div class="wrapper p-5">
+    <img src="{% static 'images/danger.svg' %}" alt="">
 
-    <div class="form-block-content">
+    <h3 class="mt-3">{% trans "Account Activation Failed" %}</h3>
 
-        <h4 class="text-danger">{% trans "Account Activation Failed" %}</h4>
-
-        <hr class="line-separator">
-
-        <p class="highlighted">
-            {% trans "This account activation link is invalid, possibly because it has already been used or it may have incorrectly been copied from your email." %}
-        </p>
-        <p class="highlighted">{% trans "Please request for a new activation link" %} <a href=""
-                class="primary">{% trans "here" %}</a>.</p>
-        <p class="highlighted">{% trans "Thank you." %}</p>
-
-    </div>
-
+    <p>{% trans "This account activation link is invalid, possibly because it has already been used or it may have incorrectly been copied from your email." %}</p>
+    <p>
+        {% trans "Please request for a new activation link" %} <a href="{# url 'accounts:resend_activation' #}"
+            class="text-info">{% trans "here" %}</a>.
+    </p>
 </div>
 
 {% endblock %}

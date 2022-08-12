@@ -1,5 +1,5 @@
 {% if form.non_field_errors %}
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-warning" role="alert">
     {% for error in form.non_field_errors %}
     <p {% if forloop.last %}class="mb-0" {% endif %}>{{ error }}</p>
     {% endfor %}
@@ -8,7 +8,7 @@
 
 {% for hidden_field in form.hidden_fields %}
 {% if hidden_field.errors %}
-<div class="alert alert-danger" role="alert">
+<div class="alert alert-warning" role="alert">
     {% for error in hidden_field.errors %}
     <p {% if forloop.last %}class="mb-0" {% endif %}>(Hidden field {{ hidden_field.name }}) {{ error }}</p>
     {% endfor %}

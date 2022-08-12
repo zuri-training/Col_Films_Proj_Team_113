@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from core.utils import mk_paginator
 from django.utils.text import slugify
 from django.contrib import messages
+from moviepy.editor import VideoFileClip
 from .forms import VideoUploadForm
 from .models import Video
 
@@ -50,6 +51,10 @@ def video_create(request):
             video.user = request.user
             video.slug = slugify(video.title)
             video.save()
+            # video.refresh_from_db()
+            # clip = VideoFileClip(video.video_file.name)
+            # video.video_length = clip.duration
+            # video.save()
             messages.success(
                 request, "Your video has been successfully created.")
             return redirect(video.get_absolute_url())
