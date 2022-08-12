@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from core.utils import mk_paginator
+from django.utils.text import slugify
 from django.contrib import messages
 from .forms import VideoUploadForm
 from .models import Video
@@ -39,65 +40,66 @@ def video_create(request):
     """
     if not request.user.is_creator:
         messages.success(
-            request, 'Your account is yet to be verified, hence you can not upload a product.')
-        return redirect('home')
+            request, 'Only creators are allowed to upload a video.')
+        return redirect('core:home')
     
     if request.method == 'POST':
         form = VideoUploadForm(request.POST, request.FILES)
         if form.is_valid():
             video = form.save(commit=False)
-            video.vendor = request.user
+            video.user = request.user
+            video.slug = slugify(video.title)
             video.save()
             messages.success(
                 request, "Your video has been successfully created.")
-            return redirect(video)
+            return redirect(video.get_absolute_url())
     else:
         form = VideoUploadForm()
 
     template = 'videos/video_create.html'
     context = {
-        'video': video,
+        'form': form,
     }
 
     return render(request, template, context)
 
 
-def product_update(request, id):
-    """ View to enable a Vendor update a product. """
-    product = get_object_or_404(Product, id=id, vendor=request.user)
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid():
-            form.save()
-            messages.success(
-                request, "Your product has been successfully updated.")
-            return redirect(product)
-    else:
-        form = ProductForm(instance=product)
+# def product_update(request, id):
+#     """ View to enable a Vendor update a product. """
+#     product = get_object_or_404(Product, id=id, vendor=request.user)
+#     if request.method == 'POST':
+#         form = ProductForm(request.POST, request.FILES, instance=product)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(
+#                 request, "Your product has been successfully updated.")
+#             return redirect(product)
+#     else:
+#         form = ProductForm(instance=product)
 
-    template_name = "products/form.html"
-    context = {
-        'form': form,
-    }
+#     template_name = "products/form.html"
+#     context = {
+#         'form': form,
+#     }
 
-    return render(request, template_name, context)
+#     return render(request, template_name, context)
 
 
-def product_delete(request, id):
-    # Use a Modal instead?
-    product = get_object_or_404(Product, id=id, vendor=request.user)
-    if request.method == 'POST':
-        product.delete()
-        messages.success(
-            request, "Your product has been deleted.")
-        return redirect(product)
+# def product_delete(request, id):
+#     # Use a Modal instead?
+#     product = get_object_or_404(Product, id=id, vendor=request.user)
+#     if request.method == 'POST':
+#         product.delete()
+#         messages.success(
+#             request, "Your product has been deleted.")
+#         return redirect(product)
 
-    template_name = "products/delete.html"
-    context = {
-        'product': product,
-    }
+#     template_name = "products/delete.html"
+#     context = {
+#         'product': product,
+#     }
 
-    return render(request, template_name, context)
+#     return render(request, template_name, context)
 
 
 def video_detail(request, slug):
@@ -111,6 +113,13 @@ def video_detail(request, slug):
     """
 
     video = get_object_or_404(Video, slug__iexact=slug)
+
+    # Create a session key for a user to monitor viewed story
+    session_key = 'viewed_story_{}'.format(video.pk)
+    if not request.session.get(session_key, False):
+        video.impressions += 1
+        video.save()
+        request.session[session_key] = True
 
     template = 'videos/video_detail.html'
     context = {

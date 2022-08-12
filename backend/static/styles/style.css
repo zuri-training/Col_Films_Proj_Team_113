@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+*{font-family: 'Montserrat';}
+
+body {
+    font-family: 'Montserrat';
+    color: #EFF7FA;
+    font-size: large;
+    font-style: normal;
+}
+
+
+.field{
+ width: 464px;
+ font-weight: 400;
+ color: #EFF7FA;
+}
+
+.in-line{
+    display: inline;
+    margin: 8px;
+}
+
+.label{
+    background-color: inherit;
+    color: #EFF7FA;
+    border: 1px solid #EFF7FA;
+}
+
+.label:focus{
+    background-color: inherit;
+    color: #EFF7FA;;
+    border: 1px solid #90B4C0;
+}
+
+select{
+    background-color: #000A12 !important;
+    color: #EFF7FA !important;
+}
+
+
+
+/* Container needed to position the button. Adjust the width as needed */
+.upload {
+    position: relative;
+    width: 80%;
+  }
+  
+  /* Make the image responsive */
+.bg-img{
+    opacity: 0.5;
+    border-radius: 8px;
+    width: 100%;
+    height: auto;
+    margin: 16px 0;
+}
+  
+  /* Style the button and place it in the middle of the container/image */
+.upload .upload-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: inherit;
+    color: #BCE6AD;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 1px solid #BCE6AD;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  .button{
+    width: 180px;
+    height: 54px;
+    background-color: #BCE6AD;
+    border-color: hwb(104 68% 10%);
+    border-radius: 8px;
+    padding: 16px 32px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 24px;
+    text-align: center;
+    gap: 8px !important;
+    text-decoration: none;
+    color: #000A12;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color:#9DC090;
+    color: #000A12;
+
+}
+.button:active{
+    background-color: #7D9973;
+
+}
+.button:disabled{
+    background-color: #BCE6AD;
+    opacity: 0.4;
+}
