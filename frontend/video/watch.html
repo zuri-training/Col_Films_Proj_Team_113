@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="watch.css">
+	<link rel="shortcut icon" href="Group 1.png" type="image/x-icon">
+    <title>Vidhut</title>
+  </head>
+  <body>
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header_toggle"> <img src="menu.png" id="header-toggle"></img></div>
+             <input type="search" class="search"  placeholder="      Enter your search" aria-label="Search">
+                <div><img src="user.png"></div> <a href="#notification"><img class="notification" src="Notification.png" alt="image"></a> 
+                <a class="btn upload" href="#upload"><img src="Upload.png" placeholder="Upload"  alt=""></a></div>
+        </header>
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div> <div class="text-center text-white"><a href="index.html" class="nav_logo"><img src="Group 1.png" alt=""></a>Home</div><br>
+                  
+                    <div class="nav_list"> <a href="#" class="nav_link active"> <img src="Explore.png" alt=""> </a> <a href="#" class="nav_link"> <img src="Vector (2).png" alt=""></a> <a href="#" class="nav_link"> <img src="Vector (3).png" alt=""> </a> <a href="#" id="v-pills-tab" class="nav_link"> <img src="setting-2.png" alt=""> </a> </div>
+                </div class=""> <a href="#" class="nav_link privacy-policy">Privacy <br>Policy</a></div>
+            </nav>
+        </div>
+<!--Container Main start-->
+<div class="container col-md-12">
+ 	<div class="main-video-container">
+        <h4 class="video-header">Sidney tv</h4>
+        <video controls id="video" poster="image 27.png" class="video" preload="metadata"><source src="yawaaa.mp4" type="video/mp4"></source></video>
+        <div class="video-controls hidden" id="video-controls">
+            <button id="play_pause"><img src="Icon.png" alt=""></button>
+            <button hidden ><img class="pause" src="pause.png" alt=""></button>
+            <input class="seek" id="seek" value="0" min="0" type="range" step="1">
+            <div class="seek-tooltip" id="seek-tooltip"></div>
+            <div class="time">
+                <time id="time-elapsed">00:00</time>
+                <span> / </span>
+                <time id="duration">00:00</time>
+            </div>
+            <button id="volume"><img src="volume-high.png" alt=""></button>
+            <a href="#download"><button id="download"><img src="Download.png" alt=""></button></a>
+            <a href="#share"><button id="share" ><img src="send-2.png" alt=""></button></a>
+        </div>
+        <div class="video-details">
+            <div id="video-title"><p>Cold sisters</p></div>
+            <div id="views"><p>143 views</p></div>
+            <div id="vide0-upload-date"><p>12 July 2022</p></div>
+            <a href="#description" class="description">Description</a>
+            <div class="follow"><a class="follow" href="#follow">Follow</a> </div>      
+
+        </div>
+       
+        <div class="comment-section">
+            <div class="profile-image"><img class="profile-image" src="image 22.png" alt=""></div>
+                <div><input class="comment" type="text" placeholder="Add a comment">
+                <a href=""><button id="send"><img src="send.png" alt=""></button></a></div>
+                <a href="#viewmore" id="view-more">View comments</a>
+            
+        </div>
+       
+    </div>
+    </div>
+		  <!--Container Main end-->
+        <script src="views.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+  </body>
+</html>
