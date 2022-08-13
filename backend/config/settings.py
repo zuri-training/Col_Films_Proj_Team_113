@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'videos',
     'crispy_forms',
     'crispy_bootstrap5',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
