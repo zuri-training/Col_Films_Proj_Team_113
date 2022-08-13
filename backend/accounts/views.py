@@ -16,6 +16,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.conf import settings
+from videos.models import Video
 from .tokens import account_activation_token
 
 
@@ -97,11 +98,25 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.email_verified = True
         user.save()
-        login(request, user, backend='accounts.authentication.EmailAuthBackend')
+        # login(request, user)
         messages.success(request, 'Your profile has been successully created.')
-        return redirect('core:home')
+        return redirect('accounts:login')
+        # return redirect('core:home')
     else:
         return render(
             request,
             'registration/activate.html',
             {})
+
+
+def profile(request, username):
+    user = get_object_or_404(User, username=user.username)
+    videos = Video.objects.filter(user=user)
+
+    template = 'accounts/profile.html'
+    context = {
+        'user': 'user',
+        'videos': videos,
+    }
+
+    return render(request, template, context)

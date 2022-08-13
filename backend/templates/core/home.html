@@ -1,11 +1,56 @@
-{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+<!doctype html>
+<html lang="en">
 
-{% block title %}Home{% endblock title %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/views.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/Group 1.png' %}" type="image/x-icon">
+    <title>Vidhut</title>
+</head>
 
-{% block content %}
+<body id="body-pd">
+    {% include "partials/_icon_navbar.html" %}
+    
+    <!--Container Main start-->
+    <div class="container">
+        <div class="row">
+            {% for video in videos %}
+            <div class="col-md-3">
+                <div class="main-video-container">
+                    <a href="{{ video.get_absolute_url }}">
+                        <video class="main-video" poster="{{ video.thumbnail.url }}" src="" type="video/mp4"></video>
+                    </a>
+                    <div class="video-duration">{{ video.video_length }}</div></a>
+                    <div class="creator-details">
+                        <img class="profile-image" src="{% static 'images/image 22.png' %}" alt="">
+                    </div>
+                    <h5 class="main-vid-title">{{ video.title }}</h5>
+                    <div class="meta-data">
+                        <div class="time"><img src="{% static 'images/Clock.png' %}" alt="">
+                            <p class="details">{{ video.created|naturaltime }}</p>
+                        </div>
+                        <div class="views"><img src="{% static 'images/eye.png' %}" alt="">
+                            <p class="details">{{ video.impressions }} view{{ video.impression|pluralize }}</p>
+                        </div>
+                        <div class="likes"><img src="{% static 'images/Vector.png' %}" alt="">
+                            <p class="details">1k likes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!--Container Main end-->
+    <script src="{% static 'scripts/views.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
 
-{% include 'partials/_alerts.html' %}
-
-Homepage
-
-{% endblock content %}
+</html>

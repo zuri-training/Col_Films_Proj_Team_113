@@ -11,6 +11,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include ('accounts.urls', namespace='accounts')),
     # path('watchlater/', views.watchlater, name='watchlater'),
+    path('videos/', include('videos.urls', namespace='videos')),
     path('', include('core.urls', namespace='core')),
 ]
 

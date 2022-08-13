@@ -1,0 +1,142 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/upload/views.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/upload/style.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/Group 1.png' %}" type="image/x-icon">
+    <title>Vidhut</title>
+</head>
+
+<body id="body-pd">
+    <header class="header container-fluid" id="header">
+
+        <input type="search" class="search field" placeholder="Enter your search" aria-label="Search">
+
+        <div>
+            <img src="{% static 'images/user.png' %}">
+        </div>
+        <a href="">
+            <img class="notification" src="{% static 'images/Notification.png' %}" alt="image">
+        </a>
+
+    </header>
+    <div class="l-navbar" id="nav-bar">
+        <nav class="nav">
+            <div>
+                <div class="text-center text-white"><a href="#" class="nav_logo"><img
+                            src="{% static 'images/Group 1.png' %}" alt=""></a>Home</div><br>
+
+                <div class="nav_list"> <a href="#" class="nav_link active"> <img src="{% static 'images/Explore.png' %}"
+                            alt=""></a><a href="#" class="nav_link"> <img src="{% static 'images/Vector (2).png' %}"
+                            alt=""></a> <a href="#" class="nav_link"> <img src="{% static 'images/Vector (3).png' %}"
+                            alt=""> </a> <a href="#" id="v-pills-tab" class="nav_link"> <img
+                            src="{% static 'images/setting-2.png' %}" alt=""> </a> </div>
+            </div class=""> <a href="#" class="nav_link privacy-policy">Privacy <br>Policy</a>
+    </div>
+    </nav>
+    </div>
+    <!--Container Main start-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg mt-5 mb-3">
+                <div>
+                    <h4>Upload</h4>
+                </div>
+            </div>
+
+        </div>
+        {% include 'partials/_alerts.html' %}
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'partials/_form_errors.html' %}
+
+            {% if video_length_error %}
+            <div class="alert alert-danger fade show" role="alert">
+                {{video_length_error}}
+            </div>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="upload">
+                        <img src="{% static 'images/tao2.png' %}" class="bg-img" alt="taoma">
+                        <input type="file" name="video_file" class="form-control" required id="id_video_file" hidden>
+                        <label class="upload-btn" for="id_video_file">
+                            <div class="in-line"><img src="{% static 'styles/upload/file-upload.svg' %}" alt=""></div>Select video
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="upload">
+                        <img src="https://via.placeholder.com/553x311" class="bg-img" alt="" id="output">
+                        <input type="file" accept="image/*" name="thumbnail" id="id_thumbnail" hidden onchange="loadFile(event)" required>
+                        <!-- <input type="file" id="upload-btn" hidden> -->
+                        <label class="upload-btn" for="id_thumbnail">
+                            <div class="in-line"><img src="{% static 'styles/upload/file-upload.svg' %}" alt=""></div>Select
+                            thumbnail
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mt-5 field">
+                        <div class="mb-3">
+                            <label for="id_title" class="form-label">Video Title</label>
+                            <input type="text" class="form-control label" id="id_title" name="title" maxlength="250"
+                                placeholder="Enter a video title" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mt-5 field">
+                        <label for="id_category" class="form-label field">Select a Category</label>
+                        <select class="form-select label" name="category" id="id_category" aria-label="Default">
+                            <div class="select-options">
+                                {% for category in categories %}
+                                <option value="{{ category.pk }}">{{ category.name }}</option>
+                                {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label for="id_description" class="form-label">Description</label>
+                        <textarea name="description" class="form-control label" maxlength="1000" rows="3"
+                            placeholder="Enter a short description" required id="id_description"></textarea>
+                    </div>
+                </div>
+            </div> 
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="button mt-5 mb-5">Upload Video</button>
+            </div>
+        </form>
+
+    </div>
+    <script src="{% static 'styles/upload/views.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+                crossorigin="anonymous"></script>
+    <script>
+        var loadFile = function (event) {
+            var image = document.getElementById('output');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+
+        document.querySelector("#file-input").addEventListener('change', function () {
+            // Set object URL as the video <source>
+            document.querySelector("#video-element source").setAttribute('src', URL.createObjectURL(document.querySelector("#file-input").files[0]));
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'styles/watch.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/Group 1.png' %}" type="image/x-icon">
+    <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet" />
+    <title>Vidhut</title>
+</head>
+<body id="body-pd">
+        
+    {% include "partials/_icon_navbar.html" %}
+
+        <!--Container Main start-->
+        <div class="container col-md-12">
+            <div class="main-video-container">
+                <h4 class="video-header">{{ video.user }}</h4>
+                <video controls id="video" class="video" preload="metadata" poster="{{ video.thumbnail.url }}">
+                    <source src="{{ video.video_file.url }}" type="video/mp4">
+                    </source>
+                </video>
+                <!-- <video id="my-video" class="video-js vjs-theme-city" controls preload="auto" width="640" height="264" poster="{{ video.thumbnail.url }}"
+                    data-setup="{}">
+                    <source src="{{ video.video_file.url }}" type="video/mp4" />
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a
+                        web browser that
+                        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video> -->
+                <!-- <div class="video-controls hidden" id="video-controls">
+                    <button id="play_pause"><img src="Icon.png" alt=""></button>
+                    <button hidden><img class="pause" src="pause.png" alt=""></button>
+                    <input class="seek" id="seek" value="0" min="0" type="range" step="1">
+                    <div class="seek-tooltip" id="seek-tooltip"></div>
+                    <div class="time">
+                        <time id="time-elapsed">00:00</time>
+                        <span> / </span>
+                        <time id="duration">00:00</time>
+                    </div>
+                    <button id="volume"><img src="volume-high.png" alt=""></button>
+                    <a href="#download"><button id="download"><img src="Download.png" alt=""></button></a>
+                    <a href="#share"><button id="share"><img src="send-2.png" alt=""></button></a>
+                </div> -->
+                <div class="video-details">
+                    <div id="video-title">
+                        <p>{{ video.title }}</p>
+                    </div>
+                    <div id="views">
+                        <p>{{ video.impressions }} view{{ video.impressions|pluralize }}</p>
+                    </div>
+                    <div id="vide0-upload-date">
+                        <p>{{ video.created|date:"d M Y" }}</p>
+                    </div>
+                    <a href="#description" class="description">{{ video.description }}</a>
+                    <div class="follow"><a class="follow" href="#follow">Follow</a> </div>
+
+                </div>
+
+                <div class="comment-section">
+                    <div class="profile-image"><img class="profile-image" src="{% static 'images/user.png' %}" alt=""></div>
+                    <div><input class="comment" type="text" placeholder="Add a comment">
+                        <a href=""><button id="send"><img src="send.png" alt=""></button></a>
+                    </div>
+                    <a href="#viewmore" id="view-more">View comments</a>
+
+                </div>
+
+            </div>
+        </div>
+        <!--Container Main end-->
+        <script src="{% static 'scripts/views.js' %}"></script>
+        <script src="https://vjs.zencdn.net/7.20.1/video.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>

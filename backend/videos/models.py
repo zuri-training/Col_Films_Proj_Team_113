@@ -3,8 +3,9 @@ import uuid
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+from django.core.validators import FileExtensionValidator
 from django.utils.translation import gettext as _
-from django.utils.text import slugify
+
 # from PIL import Image
 
 
@@ -67,9 +68,12 @@ class Video(models.Model):
                             unique=True)
     video_file = models.FileField(verbose_name=_('Video file'),
                                   upload_to='videos',
+                                  validators=[FileExtensionValidator(['mp4'])],
                                   help_text=_('Path to the uploaded video.'))
     thumbnail = models.ImageField(verbose_name=_('thumbnail'),
                                   upload_to='thumbnails',
+                                  validators=[FileExtensionValidator(
+                                    ["jpg", "jpeg", "png", "webp"])],
                                   help_text=_('An image that will be used as a thumbnail.'))
     description = models.TextField(verbose_name=_('description'),
                                    max_length=1000,
@@ -118,14 +122,10 @@ class Video(models.Model):
         verbose_name_plural = _('videos')
 
     def get_absolute_url(self):
-        return reverse('video_detail', kwargs={'slug': self.slug})
+        return reverse('videos:detail', kwargs={'slug': self.slug})
 
     def __str__(self):
         return self.title
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
 
     # Untested code
     # def save(self, *args, **kwargs):
@@ -137,3 +137,24 @@ class Video(models.Model):
     #         output_size = (300, 300)
     #         thumb.thumbnail(output_size)
     #         thumb.save(self.thumbnail.path)
+
+class Comment(models.Model):
+    video = models.ForeignKey(
+        Video,
+        on_delete=models.CASCADE,
+        related_name='comments')
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='user_comments')
+    body = models.TextField(_('body'))
+    created = models.DateTimeField(
+        auto_now_add=True)
+    active = models.BooleanField(
+        default=True)
+
+    class Meta:
+        ordering = ['-created']
+
+    def __str__(self):
+        return f'{self.user.username} - {self.video.title}'

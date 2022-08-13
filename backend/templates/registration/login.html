@@ -1,43 +1,53 @@
 {% extends "registration/base.html" %}
+
 {% block title %}Login to your account{% endblock %}
 
 {% block content %}
 
-<h1 class="head pt-2">Welcome back!</h1>
-<p class="py-2 mb-3">Hop in for a full access to our site</p>
+<div class="wrapper p-5">
 
-<form method="post" action="" class="needs-validation">
-    {% csrf_token %}
-    {% include 'partials/_form_errors.html' %}
+    <h2>Welcome back!</h2>
+    <p class="py-2 mb-3">Hop in for a full access to our site</p>
     
-    <div class="mb-3">
-        <label class="form-label" for="id_username">Email address</label>
-        <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="254"
-            placeholder="Enter your email" class="form-control {% if form.username.errors %}is-invalid{% endif %}" required
-            id="id_username" {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}" {% endif %}>
-        {% for error in form.username.errors %}
-        <div class="invalid-feedback">
-            {{ error }}
+    <form method="post" action="" class="needs-validation">
+        
+        {% csrf_token %}
+        {% include 'partials/_form_errors.html' %}
+    
+        <div class="mb-3">
+            <label class="form-label" for="id_username">Email address</label>
+            <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="254"
+                placeholder="Enter your email" class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+                required id="id_username"
+                {% if form.username.value != None %}value="{{ form.username.value|stringformat:'s' }}" {% endif %}>
+            {% for error in form.username.errors %}
+            <div class="invalid-feedback">
+                {{ error }}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-
-    <div class="mb-3">
-        <a href="{% url 'accounts:password_reset' %}" class="float-end text-white"><small>Forgot Password?</small></a>
-        <label for="id_password" class="form-label">Password:</label>
-        <input type="password" name="password" autocomplete="current-password" required id="id_password"
-            class="form-control {% if form.password.errors %}is-invalid{% endif %}" placeholder="******">
-        {% for error in form.password.errors %}
-        <div class="invalid-feedback">
-            {{ error }}
+    
+        <div class="mb-3">
+            <a href="{% url 'accounts:password_reset' %}" class="float-end text-white"><small>Forgot Password?</small></a>
+            <label for="id_password" class="form-label">Password:</label>
+            <input type="password" name="password" autocomplete="current-password" required id="id_password"
+                class="form-control {% if form.password.errors %}is-invalid{% endif %}" placeholder="******">
+            {% for error in form.password.errors %}
+            <div class="invalid-feedback">
+                {{ error }}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
+    
+        <div class="mb-3">
+            <button type="submit" class="btn button-primary">Log in</button>
+        </div>
+    
+        <p>Don't have an account? <a href="{% url 'accounts:signup_choice' %}" class="text-info">Sign
+                up</a>
+        </p>
+    </form>
 
-    <button class="btn submit my-3" type="submit">Log in</button>
-
-    <p class="text-center">Don't have an account? <a href="{% url 'accounts:signup_choice' %}" class="text-white">Sign up</a>
-    </p>
-</form>
+</div>
 
 {% endblock content %}

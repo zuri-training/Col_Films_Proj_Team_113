@@ -46,7 +46,7 @@
                     </ul>
                     <div class="navbar-nav ms-auto">
                         <a href="{% url 'accounts:signup_choice' %}" class="btn vidhut__button-primary mb-1">Sign up</a>
-                        <a href="{# url 'accounts:signup' #}" class="btn vidhut__button-secondary mb-1">Tour hut</a>
+                        <a href="{# url 'accounts:tour' #}" class="btn vidhut__button-secondary mb-1">Tour hut</a>
                         <a href="{% url 'accounts:login' %}" class="btn vidhut__button-secondary mb-1 me-lg-0">Log in</a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                 <div class="col-md-8 text-center">
                     <h4 class="mb-5">You are just a click away from uploading, viewing and sharing films with students
                         just like you</h4>
-                    <a class="btn vidhut__button-primary fs-5" href="{# url 'accounts:signup' #}">Join hut</a>
+                    <a class="btn vidhut__button-primary fs-5" href="{% url 'accounts:signup_choice' %}">Join hut</a>
                 </div>
             </div>
         </div> <!-- End Hero -->
