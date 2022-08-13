@@ -65,21 +65,39 @@ _Follow the steps below to get the program working on your system locally._
     ```
 3. Setup a virtual environment
     ```sh
-    python -m venv venv
+    python3 -m venv venv
     ```
 4. Activate the virtual environment
     ```sh
-    source \venv\Scripts\activate
+    . venv/bin/activate
     ```
 5. Install the project requirements
     ```sh
     pip install -r requirements.txt
     ```
-6. Start the local development server
+6. Move into the backend folder where the development files reside
+    ```sh
+    cd backend
+    ```
+7. Create your database migrations
+    ```sh
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+8. Create a superuser
+    ```sh
+    python manage.py createsuperuser
+    ```
+    Use the example credentials
+    ```
+    Email: admin@school.edu.ng
+    Passsword: schooladminpassword
+    ```
+9. Start the local development server
     ```sh
     python manage.py runserver
     ```
-7. Visit the URL via the browser
+10. Visit the URL via the browser
     ```sh
     http://127.0.0.1:8000/
     ```
