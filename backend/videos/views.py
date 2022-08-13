@@ -5,7 +5,7 @@ from django.utils.text import slugify
 from django.contrib import messages
 from moviepy.editor import VideoFileClip
 from django.core.files.uploadedfile import UploadedFile
-from .forms import VideoUploadForm
+from .forms import VideoUploadForm, CommentForm
 from .models import Video, Category
 
 
@@ -29,7 +29,7 @@ from .models import Video, Category
 
 #     return render(request, template_name, context)
 
-def convert(seconds):
+def format_video_length(seconds):
     hours = seconds // 3600
     seconds %= 3600
     mins = seconds // 60
@@ -60,20 +60,20 @@ def video_create(request):
             video.user = request.user
             video.slug = slugify(video.title)
             
-            vid = request.FILES['video_file']
-            clip = VideoFileClip(vid.temporary_file_path())
-            temp_length = int(clip.duration)
-            if temp_length > 600:
-                length_error = 'Film Is Longer Than 15 Minutes'
+            video_file_path = request.FILES['video_file']
+            clip = VideoFileClip(video_file_path.temporary_file_path())
+            temporary_video_length = int(clip.duration)
+            if temporary_video_length > 900:
+                video_length_error = 'Your video was more than 15 minutes, upload another.'
                 return render(
                     request, 'videos/video_create.html',
-                    {'form':form, 'length_error':length_error})
-            elif temp_length <= 600:
-                video.video_length = convert(int(clip.duration))
+                    {'form':form, 'video_length_error': video_length_error})
+            elif temporary_video_length <= 900:
+                video.video_length = format_video_length(int(clip.duration))
                 video.save()
                 return redirect(video.get_absolute_url())
         else:
-           messages.warning(
+            messages.warning(
                 request, "An error occured, check below.") 
     else:
         form = VideoUploadForm()
@@ -138,7 +138,6 @@ def video_detail(request, slug):
 
     video = get_object_or_404(Video, slug__iexact=slug)
 
-    # Create a session key for a user to monitor viewed story
     session_key = 'viewed_story_{}'.format(video.pk)
     if not request.session.get(session_key, False):
         video.impressions += 1
@@ -147,6 +146,23 @@ def video_detail(request, slug):
 
     similar_videos = Video.objects.filter(
         category=video.category).exclude(id=video.id)
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.user = request.user
+            comment.video = video
+            comment.save()
+            messages.success(
+                request, "Thanks! Your comment was submitted successfully.")
+            return redirect(video.get_absolute_url())
+        else:
+            messages.warning(
+                request, "An error occured while submitting your form, check below")
+    else:
+        comment_form = CommentForm()
+
 
     template = 'videos/video_detail.html'
     context = {

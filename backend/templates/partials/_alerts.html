@@ -1,14 +1,10 @@
 {% if messages %}
 {% for message in messages %}
-<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 11;">
-    <div class="toast align-items-center text-white bg-{{ message.tags }} border-0" data-bs-delay="10000" role="alert"
-        aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">{{ message }}</div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-                aria-label="Close"></button>
-        </div>
-    </div>
+
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
+
 {% endfor %}
 {% endif %}
