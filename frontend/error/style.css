@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #EFF7FA !important;
+}
+body{
+    background-color: #000A12;
+}
+
+h5{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.h5-404{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+p{
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.wrapper{
+    background-color: #2B333A !important;
+    width: 1200px;
+    height: fit-content;
+    background-color: #2B333A;
+    border-radius: 8px;
+    padding: 30px;
+    margin: 90px auto;
+    max-width: 100%;
+}
+
+
+img{
+    max-width: 100%;
+   
+}
+
+.button{
+    padding: 8px 32px;
+    width: 100px;
+    height: 40px;
+    background-color: #BCE6AD;
+    border-color: hwb(104 68% 10%);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600 !important;
+    font-style: normal;
+    line-height: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #000A12 !important;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #9DC090;
+}
+
+.button:active{
+    background-color: #7D9973;
+}
+
+.button:disabled{
+    background-color: #BCE6AD;
+    opacity: 0.4;
+}
+
+.btn-404{
+    padding: 8px;
+    width: fit-content;
+    text-align: center;
+    margin-top: 32px;
+}
+
+@media screen and (max-width: 480px) {
+
+    body{width: 400px;  background-color: #000A12 !important; height: fit-content; margin-top: 127px;}
+    h5,.h5-404{font-size: 16px;}
+    #wrapper{background-color: #000A12 !important;}
+    #mobile{display:flex; flex-direction: column-reverse; align-items: center;}
+    div#mobile-content{display: flex; flex-direction: column; justify-content: center; align-items: center; align-self: center;}
+    h5, p {text-align: center;}
+    #btn{display: flex; flex-direction: row;}
+  }
