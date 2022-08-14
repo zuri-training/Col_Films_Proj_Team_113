@@ -20,6 +20,11 @@ class Category(models.Model):
     slug = models.SlugField(verbose_name=_('slug'),
                             max_length=100,
                             unique=True)
+    description = models.CharField(verbose_name=_('description'),
+                                   max_length=100)
+    image = models.ImageField(verbose_name=_('image'), upload_to='categories')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['name']
@@ -32,7 +37,7 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         """Return the URL to access a particular instance of category."""
-        return reverse('videos:category_detail', kwargs={'slug': self.slug})
+        return reverse('core:category_detail', kwargs={'slug': self.slug})
 
 
 class Video(models.Model):
@@ -103,15 +108,17 @@ class Video(models.Model):
     updated = models.DateTimeField(verbose_name=_('updated'),
                                    auto_now=True,
                                    help_text=_('The date/time when the user made changes to the video information'))
-    favorites = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                       related_name=_('favorites'),
-                                       verbose_name=_('user favorites'),
+    likes = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                       related_name=_('likes'),
+                                       verbose_name=_('user likes'),
                                        blank=True,
-                                       help_text=_('Users who added video to their favorites.'))
+                                       help_text=_('Users who added video to their likes.'))
+    like_count = models.BigIntegerField(default=0)
     video_length = models.CharField(verbose_name=_('video length'),
                                     max_length=10,
                                     help_text=_('Length of the video in minutes:seconds'),
                                     blank=True)
+    
     flag = models.BooleanField(verbose_name=_('_is flagged?'),
                                default=False,
                                help_text=_('If this video has been flagged for violations'))

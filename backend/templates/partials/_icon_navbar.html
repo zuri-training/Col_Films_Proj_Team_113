@@ -1,34 +1,62 @@
 {% load static %}
 
 <header class="header" id="header">
-    <div class="header_toggle">
+    <div class="header_toggle d-lg-none">
         <img src="{% static 'images/menu.png' %}" id="header-toggle"></img>
     </div>
-    <input type="search" class="search" placeholder="Enter your search" aria-label="Search">
     <div>
-        <img src="{% static 'images/user.png' %}">
+        <input type="search" class="search" placeholder="Enter your search" aria-label="Search">
     </div>
-    <a href="">
-        <img class="notification" src="{% static 'images/Notification.png' %}" alt="image">
-    </a>
-    <a class="btn upload" href="{% url 'videos:create' %}">
-        <img src="{% static 'images/Upload.png' %}" placeholder="Upload" alt="">
-    </a>
-    <a class="btn upload" href="{% url 'accounts:logout' %}">Logout</a>
+    <div>
+        <a href="{% url 'accounts:profile' %}">
+            <img src="{% static 'images/user.png' %}">
+        </a>
+        <a href="">
+            <img class="notification" src="{% static 'images/Notification.png' %}" alt="image">
+        </a>
+        {% if request.user.is_creator %}
+        <a class="btn upload" href="{% url 'videos:create' %}">
+            <img src="{% static 'images/Upload.png' %}" placeholder="Upload" alt="">
+        </a>
+        {% endif %}
+        <a class="btn upload" href="{% url 'accounts:logout' %}">Logout</a>
     </div>
 </header>
+
 <div class="l-navbar" id="nav-bar">
     <nav class="nav">
         <div>
-            <div class="text-center text-white"><a href="{% url 'core:home' %}" class="nav_logo"><img
-                        src="{% static 'images/Group 1.png' %}" alt=""></a>Home</div><br>
-
-            <div class="nav_list"> <a href="{# url 'core:explore' #}" class="nav_link active"> <img src="{% static 'images/Explore.png' %}"
-                        alt=""> </a> <a href="#" class="nav_link"> <img src="{% static 'images/Vector (2).png' %}"
-                        alt=""></a> <a href="{# url 'community' #}" class="nav_link"> <img src="{% static 'images/Vector (3).png' %}"
-                        alt=""> </a> <a href="#" id="v-pills-tab" class="nav_link"> <img
-                        src="{% static 'images/setting-2.png' %}" alt=""> </a> </div>
-        </div class=""> <a href="#" class="nav_link privacy-policy">Privacy <br>Policy</a>
-</div>
-</nav>
+            <div class="text-center text-white">
+                <a href="{% url 'core:home' %}" class="nav_logo active">
+                    <img src="{% static 'images/favicon.png' %}" alt="">
+                </a> Home
+            </div>
+            <br>
+            <div class="text-center text-white">
+                <a href="{# url 'core:explore' #}" class="nav_logo">
+                    <img src="{% static 'images/Explore.png' %}" alt="">
+                </a> Tour
+            </div>
+            <br>
+            <div class="text-center text-white">
+                <a href="{# url 'core:explore' #}" class="nav_logo">
+                    <img src="{% static 'images/Vector (2).png' %}" alt="">
+                </a> Library
+            </div>
+            <br>
+            <div class="text-center text-white">
+                <a href="{# url 'core:explore' #}" class="nav_logo">
+                    <img src="{% static 'images/Vector (3).png' %}" alt="">
+                </a> Huts
+            </div>
+            <br>
+            <div class="text-center text-white">
+                <a href="{# url 'core:explore' #}" class="nav_logo">
+                    <img src="{% static 'images/setting-2.png' %}" alt="">
+                </a> Settings
+            </div>
+            <br>
+        </div> 
+        <a href="#" class="nav_link privacy-policy">Privacy <br>Policy</a>
+    </nav>
 </div>

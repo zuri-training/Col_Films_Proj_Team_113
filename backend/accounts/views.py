@@ -72,6 +72,57 @@ def creator_signup(request):
 
     template = 'registration/signup.html'
     context = {
+        'form': form,
+        'creator': True,
+    }
+    
+    return render(request, template, context)
+
+
+def viewer_signup(request):
+    if request.user.is_authenticated:
+        return redirect('core:home')
+    
+    if request.method == 'POST':
+        form = ViewerSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.is_viewer = True
+            user.save()
+            current_site = get_current_site(request)
+
+            if request.is_secure():
+                protocol = 'https'
+            else:
+                protocol = 'http'
+            
+            subject = render_to_string(
+                'registration/account_activation_subject.txt', 
+                {'site_name': current_site.name}
+            )
+            
+            message = render_to_string(
+                'registration/account_activation_email.html',
+                {'user': user,
+                 'domain': current_site.domain,
+                 'protocol': protocol,
+                 'site_name': current_site.name,
+                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                 'token': account_activation_token.make_token(user),}
+            )
+            user.email_user(subject, message)
+            return redirect('accounts:account_activation_sent')
+        else:
+            messages.error(request, "An error occured while trying to create your account.")
+            return render(request,
+                'registration/signup.html',
+                {'form': form})
+    else:
+        form = ViewerSignUpForm()
+
+    template = 'registration/signup.html'
+    context = {
         'form': form
     }
     
@@ -109,14 +160,14 @@ def activate(request, uidb64, token):
             {})
 
 
-def profile(request, username):
-    user = get_object_or_404(User, username=user.username)
-    videos = Video.objects.filter(user=user)
+def profile(request):
+    # user = get_object_or_404(User, username=user.username)
+    # videos = Video.objects.filter(user=user)
 
-    template = 'accounts/profile.html'
+    template = 'account/profile.html'
     context = {
-        'user': 'user',
-        'videos': videos,
+        # 'user': user,
+        # 'videos': videos,
     }
 
     return render(request, template, context)

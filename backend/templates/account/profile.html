@@ -1,0 +1,73 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block styles %}<link rel="stylesheet" href="{% static 'styles/profile_creators.css' %}">{% endblock %}
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+
+<div class="user-info d-flex ">
+    <div>
+        <img src="assets/user-dp.png" id="user-dp " class="user-dp rounded-circle ms-5 mt-2" width="115">
+    </div>
+    <div class="mt-3 ms-3">
+        <div class="name mb-2">Philemon Timi</div>
+        <div class="username mb-3">Philemon Timi</div>
+        <div class="user-bio ">A college student with full vibes and a comedian</div>
+
+    </div>
+    <div>
+        <a href="#" class="d-flex update-profile"><img src="assets/edit.png" width="12" height="12"
+                class="edit-icon me-2">Update Profile</a>
+    </div>
+</div>
+<div class="user-track">
+    <div class=" d-flex ms-5 mt-2">
+        <div class="m-2 nowrap"><strong>20</strong> Followers</div>
+        <div class="m-2 nowrap"><strong>56</strong> Following</div>
+        <div class="m-2 nowrap"><strong>46</strong> Likes</div>
+        <div class="m-2 nowrap"><strong>78</strong> Contents</div>
+    </div>
+</div>
+<div id="mid-nav">
+    <div class="ms-5 linked-pages"><a href="#" class="linked-videos me-2 pb-2 text-decoration-none">Videos</a>
+        <a href="#" class="linked-collections ms-5 text-decoration-none">Collections</a>
+    </div>
+</div>
+
+<div class="video-grid d-flex mt-4 ms-5">
+    <div class="video grid-item">
+        <img src="assets/176913331_897440597470915_1512870270134137168_n-edited.jpg" width="200" class="rounded">
+        <div>
+            <img src="assets/user-dp.png" class="user-dp rounded-circle ms-2 mt-2" width="15">
+            <span class="video-author">DJ Cuppy x Zlatan</span>
+            <div class="video-title ms-2">Gelato</div>
+            <div class="video-track mt-4">
+                <ul class="d-flex">
+                    <li class="me-2"><img src="assets/Clock.png">1hr ago</li>
+                    <li class="me-2"><img src="assets/Reveal.png">120 views</li>
+                    <li><img src="assets/Heart.png">2000 likes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="video  grid-item ms-4">
+        <img src="assets/176913331_897440597470915_1512870270134137168_n-edited.jpg" width="200" class="rounded">
+        <div>
+            <img src="assets/user-dp.png" class="user-dp rounded-circle ms-2 mt-2" width="15">
+            <span class="video-author">DJ Cuppy x Zlatan</span>
+            <div class="video-title ms-2">Gelato</div>
+            <div class="video-track mt-4">
+                <ul class="d-flex">
+                    <li class="me-2"><img src="assets/Clock.png">1hr ago</li>
+                    <li class="me-2"><img src="assets/Reveal.png">120 views</li>
+                    <li><img src="assets/Heart.png">2000 likes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

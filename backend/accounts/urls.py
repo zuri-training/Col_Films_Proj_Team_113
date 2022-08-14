@@ -17,7 +17,6 @@ urlpatterns = [
      path('activation/sent/',
         views.account_activation_sent,
         name='account_activation_sent'),
-
      path('activate/<uidb64>/<token>/',
         views.activate, 
         name='activate'),
@@ -38,5 +37,8 @@ urlpatterns = [
     # Registration
     path('signup/choice/', views.signup_choice, name='signup_choice'),
     path('creator/signup/', views.creator_signup, name='creator_signup'),
-    # path('customer/signup/', views.customer_signup, name='customer_signup'),
+    path('viewer/signup/', views.viewer_signup, name='viewer_signup'),
+
+    # Profile
+    path('profile/', views.profile, name='profile'),
 ]

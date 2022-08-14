@@ -6,6 +6,7 @@ from django.contrib import messages
 from moviepy.editor import VideoFileClip
 from django.core.files.uploadedfile import UploadedFile
 from .forms import VideoUploadForm, CommentForm
+from django.http import JsonResponse
 from .models import Video, Category
 
 
@@ -147,6 +148,8 @@ def video_detail(request, slug):
     similar_videos = Video.objects.filter(
         category=video.category).exclude(id=video.id)
 
+    comments = video.comments.all()
+
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -168,6 +171,27 @@ def video_detail(request, slug):
     context = {
         'video': video,
         'similar_videos': similar_videos,
+        'comments': comments,
     }
 
     return render(request, template, context)
+
+
+@login_required
+def like(request):
+    if request.POST.get('action') == 'post':
+        result = ''
+        id = int(request.POST.get('videoid'))
+        video = get_object_or_404(Video, id=id)
+        if video.likes.filter(id=request.user.id).exists():
+            video.likes.remove(request.user)
+            video.like_count -= 1
+            result = video.like_count
+            video.save()
+        else:
+            video.likes.add(request.user)
+            video.like_count += 1
+            result = video.like_count
+            video.save()
+
+        return JsonResponse({'result': result, })
