@@ -1,0 +1,234 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+{% load humanize %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tour VidHut</title>
+    <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <style>
+    .video-card {
+        padding: 16px;
+        gap: 16px;
+        width: 280px;
+        height: 312px;
+        border: 1px solid #2B333A;
+        border-radius: 8px;
+    }
+    .main-video {
+        width: 248px;
+        height: 184px;
+        border-radius: 8px;
+        z-index: 1;
+    }
+    .video-duration {
+        padding: 8px;
+        position: sticky;
+        float: right;
+        margin-top: -60px;
+        width: 57px;
+        z-index: 99;
+        height: 43px;
+        left: 259px;
+        top: 130px;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 160%;
+        color: #EFF7FA;
+        background: rgba(6, 6, 6, 0.7);
+        border-radius: 8px;
+    }
+    .creator-details {
+        padding: 0px;
+        gap: 8px;
+        width: 134px;
+        height: 20px;
+        font-weight: 400;
+        font-size: 12px;
+        color: #EFF7FA;
+    }
+    .profile-image {
+        width: 20px;
+        height: 20px;
+        border-radius: 240px;
+        transform: matrix(-1, 0, 0, 1, 0, 0);
+    }
+    .main-vid-title {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 140%;
+        margin-top: 10px;
+        color: #EFF7FA;
+    }
+    .meta-data {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20px;
+        gap: 8px;
+        width: 250px;
+        height: 14px;
+    }
+    .time {
+        padding: 0px;
+        font-size: 10px;
+        color: #EFF7FA;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 14px;
+        margin-right: 10px;
+        gap: 8px;
+    }
+    .details {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .views {
+        padding: 0px;
+        font-size: 10px;
+        color: #EFF7FA;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 10px;
+        gap: 8px;
+        height: 14px;
+    }
+
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar vidhut__bg-grey navbar-expand-lg">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand me-5" href="{% url 'core:home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="VidHut">
+            </a>
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link {% url 'core:home' as home_url %}{% if request.get_full_path == home_url %}vidhut__nav-active{% else %}vidhut__text-white{% endif %} me-4"
+                            href="{% url 'core:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#howto">How To</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#categories">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 vidhut__text-white" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link me-4 {% url 'core:tour' as tour_url %}{% if request.get_full_path == tour_url %}vidhut__nav-active{% else %}vidhut__text-white{% endif %}"
+                            href="{% url 'core:tour' %}">Tour hut</a>
+                    </li>
+                </ul>
+                <div class="navbar-nav ms-auto">
+                    <a href="{% url 'accounts:signup_choice' %}" class="btn vidhut__button-primary mb-1">Sign up</a>
+                    <a href="{% url 'accounts:login' %}" class="btn vidhut__button-secondary mb-1 me-lg-0">Log
+                        in</a>
+                </div>
+            </div>
+        </div>
+    </nav> <!-- End Navbar -->
+
+    <!-- Categories -->
+    <section class="vidhut__bg-dark" id="categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2 class="section-title">Trending Videos</h2>
+                </div>
+            </div>
+
+            <div class="row">
+
+                {% for video in videos %}
+                <div class="col-md-3">
+                    <div class="video-card">
+                        <a href="{{ video.get_absolute_url }}">
+                            <video class="main-video" poster="{{ video.thumbnail.url }}" src="" type="video/mp4"></video>
+                        </a>
+                        <div class="video-duration">{{ video.video_length }}</div></a>
+                        <div class="creator-details">
+                            <img class="profile-image" src="{% static 'images/image 22.png' %}" alt="">
+                        </div>
+                        <h5 class="main-vid-title">{{ video.title }}</h5>
+                        <div class="meta-data">
+                            <div class="time"><img src="{% static 'images/Clock.png' %}" alt="">
+                                <p class="details">{{ video.created|naturaltime }}</p>
+                            </div>
+                            <div class="views"><img src="{% static 'images/eye.png' %}" alt="">
+                                <p class="details">{{ video.impressions }} view{{ video.impression|pluralize }}</p>
+                            </div>
+                            <!-- <div class="likes"><img src="{% static 'images/Vector.png' %}" alt="">
+                                <p class="details">1k likes</p>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <!-- <a class="mt-4 btn see-more" href="javascript:void(0)">Load More</a> -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="vidhut__bg-grey">
+        <div class="container py-4 px-4">
+            <div class="row">
+                <div class="col-lg-6 col-md col-sm col-12 mb-5">
+                    <img src="{% static 'images/logo.png' %}" alt="logo">
+                    <h4 class="ms-3 d-inline vidhut__text-white">Vidhut Inc. 2022</h4>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Explore</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="FAQs">FAQs</a></li>
+                        <li><a href="#only">Only on Vidhut</a></li>
+                        <li><a href="#explore">Explore contents</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Company</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#privacy">Privacy</a></li>
+                        <li><a href="#terms">Terms of use</a></li>
+                        <li><a href="Howto">How to upload</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md col-sm-4 col-12">
+                    <h5 class="vidhut__text-white fw-bold mb-4">Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact us</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#mediacenter">Media center</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'scripts/app.js' %}"></script>
+</body>
+
+</html>

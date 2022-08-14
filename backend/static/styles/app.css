@@ -393,3 +393,125 @@ footer img {
         align-items: center;
     }
 }
+
+/* Video card */
+.main-video-container,
+.container {
+    justify-self: center;
+    justify-content: center;
+    width: 320px;
+}
+
+.main-video-container {
+    padding: 16px;
+    gap: 16px;
+    width: 280px;
+    height: 312px;
+    border: 1px solid #2B333A;
+    border-radius: 8px;
+
+}
+
+.main-video {
+    width: 248px;
+    height: 184px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.profile-image {
+    width: 20px;
+    height: 20px;
+    border-radius: 240px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.video-duration {
+    padding: 8px;
+    position: sticky;
+    float: right;
+    margin-top: -60px;
+    width: 57px;
+    z-index: 99;
+    height: 43px;
+    left: 259px;
+    top: 130px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 160%;
+    color: #EFF7FA;
+    background: rgba(6, 6, 6, 0.7);
+    border-radius: 8px;
+}
+
+.creator-details {
+    padding: 0px;
+    gap: 8px;
+    width: 134px;
+    height: 20px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #EFF7FA;
+}
+
+.main-vid-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 140%;
+    margin-top: 10px;
+    color: #EFF7FA;
+
+}
+
+.time {
+    padding: 0px;
+    font-size: 10px;
+    color: #EFF7FA;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 14px;
+    margin-right: 10px;
+    gap: 8px;
+
+}
+
+.views {
+    padding: 0px;
+    font-size: 10px;
+    color: #EFF7FA;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+    gap: 8px;
+    height: 14px;
+}
+
+.likes {
+    padding: 0px;
+    font-size: 10px;
+    color: #EFF7FA;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+    height: 14px;
+    line-height: 140%;
+}
+
+.meta-data {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 8px;
+    width: 250px;
+    height: 14px;
+}
+
+.details {
+    margin-bottom: 0;
+    margin-top: 0;
+}

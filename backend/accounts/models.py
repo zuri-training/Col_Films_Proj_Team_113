@@ -10,21 +10,12 @@ from django.core.exceptions import ValidationError
 from .managers import UserManager
 
 
-def validate_school_email(email):
-    """Verifies that the email has a .edu extension."""
-    if ".edu" not in email.split("@")[1]:
-        raise ValidationError("Your email has to be a school email.")
-    else:
-        return email
-
-
 class User(AbstractUser):
     """User model."""
 
     username = None
     email = models.EmailField(_('email'),
-                              unique=True,
-                              validators=[validate_school_email])
+                              unique=True)
     email_verified = models.BooleanField(default=False)
 
     is_viewer = models.BooleanField(default=False)

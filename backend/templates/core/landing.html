@@ -8,6 +8,7 @@
     <title>Welcome to VidHut</title>
     <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
 </head>
 
 <body>
@@ -43,10 +44,12 @@
                         <li class="nav-item">
                             <a class="nav-link me-4 vidhut__text-white" href="#contact">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link me-4 {% url 'core:tour' as tour_url %}{% if request.get_full_path == tour_url %}vidhut__nav-active{% else %}vidhut__text-white{% endif %}" href="{% url 'core:tour' %}">Tour hut</a>
+                        </li>
                     </ul>
                     <div class="navbar-nav ms-auto">
                         <a href="{% url 'accounts:signup_choice' %}" class="btn vidhut__button-primary mb-1">Sign up</a>
-                        <a href="{# url 'accounts:tour' #}" class="btn vidhut__button-secondary mb-1">Tour hut</a>
                         <a href="{% url 'accounts:login' %}" class="btn vidhut__button-secondary mb-1 me-lg-0">Log in</a>
                     </div>
                 </div>
@@ -192,43 +195,20 @@
             </div>
 
             <div class="row justify-content-center">
+                {% for c in categories %}
                 <div class="col-md-3 card p-4">
-                    <img class="img-fluid mb-3" src="{% static 'images/category-music.jpg' %}" alt="">
-                    <h4><a href="category.html" class="text-decoration-none text-white">Music</a></h4>
-                    <p class="card-text">Stay up to date with the latest music trends </p>
+                    <img class="img-fluid mb-3" src="{{ c.image.url }}" alt="">
+                    <h4><a href="{# c.get_absolute_url #}" class="text-decoration-none text-white">{{ c.name }}</a></h4>
+                    <p class="card-text">{{ c.description }}</p>
                 </div>
-                <div class="col-md-3 card p-4">
-                    <img class="img-fluid mb-3" src="{% static 'images/category-comedy.jpg' %}" alt="">
-                    <h4><a href="category.html" class="text-decoration-none text-white">Comedy</a></h4>
-                    <p class="card-text">Laugh to the pit of your stomach</p>
-                </div>
-                <div class="col-md-3 card p-4">
-                    <img class="img-fluid mb-3" src="{% static 'images/category-film.jpg' %}" alt="">
-                    <h4><a href="category.html" class="text-decoration-none text-white">Film</a></h4>
-                    <p class="card-text">Drama unlimited, keeping you glued to your screen</p>
-                </div>
-                <div class="col-md-3 card p-4">
-                    <img class="img-fluid mb-3" src="{% static 'images/category-poetry.jpg' %}" alt="">
-                    <h4><a href="category.html" class="text-decoration-none text-white">Poetry</a></h4>
-                    <p class="card-text">Stay up to date with the latest music trends</p>
-                </div>
-                <div class="col-md-3 card p-4">
-                    <img class="img-fluid mb-3" src="{% static 'images/category-tutorial.jpg' %}" alt="">
-                    <h4><a href="category.html" class="text-decoration-none text-white">Tutorial</a></h4>
-                    <p class="card-text">Laugh to the pit of your stomach</p>
-                </div>
-                <div class="col-md-3 card p-4">
-                    <img class="img-fluid mb-3" src="{% static 'images/category-anime.jpg' %}" alt="">
-                    <h4><a href="category.html" class="text-decoration-none text-white">Anime</a></h4>
-                    <p class="card-text">Drama unlimited, keeping you glued to your screen</p>
-                </div>
+                {% endfor %}
                 <a class="mt-4 btn see-more" href="javascript:void(0)">More categories</a>
             </div>
         </div>
     </section>
 
     <!-- Contact -->
-    <section class="vidhut__bg-dark" id="contact">
+    <section class="vidhut__bg-grey" id="contact">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-lg-12 text-center">
@@ -237,19 +217,19 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-md-3 vidhut__bg-grey vidhut__rounded-border p-5 mx-5 mb-3">
+                <div class="col-md-3 vidhut__bg-dark vidhut__rounded-border p-5 mx-5 mb-3">
                     <img src="{% static 'images/call.png' %}" alt="Call us">
                     <h4 class="ms-3 d-inline">Call us</h4>
                     <p class="mt-3 mb-0 fs-5">+234 701 4300 630</p>
                     <p class="fs-5">+234 701 2345 689</p>
                 </div>
-                <div class="col-md-3 vidhut__bg-grey vidhut__rounded-border p-5 mx-5 mb-3">
+                <div class="col-md-3 vidhut__bg-dark vidhut__rounded-border p-5 mx-5 mb-3">
                     <img src="{% static 'images/call.png' %}" alt="chatlive">
                     <h4 class="ms-3 d-inline">Chat live</h4>
                     <p class="mt-3 fs-5">We're available <br>
                         8am-8pm <br>Monday-Saturday</p>
                 </div>
-                <div class="col-md-3 vidhut__bg-grey vidhut__rounded-border p-5 mx-5 mb-3">
+                <div class="col-md-3 vidhut__bg-dark vidhut__rounded-border p-5 mx-5 mb-3">
                     <img src="{% static 'images/call.png' %}" alt="visitus">
                     <h4 class="ms-3 d-inline">Visit us</h4>
                     <p class="mt-3 fs-5">
@@ -261,7 +241,7 @@
         </div>
     </section>
 
-    <footer class="vidhut__bg-grey">
+    <footer class="vidhut__bg-dark">
         <div class="container py-4 px-4">
             <div class="row">
                 <div class="col-lg-6 col-md col-sm col-12 mb-5">

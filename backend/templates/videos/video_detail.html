@@ -12,6 +12,27 @@
     <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet" />
     <title>Vidhut</title>
+    <style>
+        :root {
+            --avatar-size: 3rem;
+        }
+
+        .circle {
+            background-color: #ccc;
+            border-radius: 50%;
+            height: var(--avatar-size);
+            text-align: center;
+            width: var(--avatar-size);
+        }
+
+        .initials {
+            font-size: calc(var(--avatar-size) / 2); /* 50% of parent */
+            line-height: 1;
+            position: relative;
+            top: calc(var(--avatar-size) / 4); /* 25% of parent */
+        }
+
+    </style>
 </head>
 <body id="body-pd">
         
@@ -21,11 +42,12 @@
         <div class="container col-md-12">
             <div class="main-video-container">
                 <h4 class="video-header">{{ video.user }}</h4>
-                <video controls id="video" class="video" preload="metadata" poster="{{ video.thumbnail.url }}">
+                <!-- <video controls id="video" class="video" preload="metadata" poster="{{ video.thumbnail.url }}">
                     <source src="{{ video.video_file.url }}" type="video/mp4">
                     </source>
-                </video>
-                <!-- <video id="my-video" class="video-js vjs-theme-city" controls preload="auto" width="640" height="264" poster="{{ video.thumbnail.url }}"
+                </video> -->
+
+                <video id="my-video" class="video-js vjs-theme-city video" controls preload="auto" width="640" height="500" poster="{{ video.thumbnail.url }}"
                     data-setup="{}">
                     <source src="{{ video.video_file.url }}" type="video/mp4" />
                     <p class="vjs-no-js">
@@ -33,7 +55,7 @@
                         web browser that
                         <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
                     </p>
-                </video> -->
+                </video>
                 <!-- <div class="video-controls hidden" id="video-controls">
                     <button id="play_pause"><img src="Icon.png" alt=""></button>
                     <button hidden><img class="pause" src="pause.png" alt=""></button>
@@ -58,18 +80,36 @@
                     <div id="vide0-upload-date">
                         <p>{{ video.created|date:"d M Y" }}</p>
                     </div>
-                    <a href="#description" class="description">{{ video.description }}</a>
-                    <div class="follow"><a class="follow" href="#follow">Follow</a> </div>
+                    <p class="description">{{ video.description }}</p>
+                    <span class="" id="like_count">{{ video.like_count }}</span>
+                    <button class="btn btn-link text-dark p-0 border-0 btn-outline-light" id="like-button" value="{{ video.id }}">Like</button>
+                    <!-- <div class="follow"><a class="follow" href="#follow">Follow</a> </div> -->
 
                 </div>
 
                 <div class="comment-section">
-                    <div class="profile-image"><img class="profile-image" src="{% static 'images/user.png' %}" alt=""></div>
-                    <div><input class="comment" type="text" placeholder="Add a comment">
-                        <a href=""><button id="send"><img src="send.png" alt=""></button></a>
-                    </div>
-                    <a href="#viewmore" id="view-more">View comments</a>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {# comment_form.as_p #}
+                        <input class="comment" type="text" placeholder="Add a comment" name="body" required id="id_body">
+                        <button type="submit" id="send"><img src="{% static 'images/send.png' %}" alt=""></button>
+                    </form>
+                    
+                </div>
 
+                <div class="row">
+                    <div class="col-lg-6">
+                        {% for comment in comments %}
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 circle">
+                                <span class="initials">MS</span>
+                            </div>
+                            <div class="flex-grow-1 ms-3 mt-3 text-white">
+                                {{ comment.body }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
 
             </div>
@@ -80,6 +120,26 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"></script>
+        <script>
+            $(document).on('click', '#like-button', function (e) {
+                    e.preventDefault();
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "videos:like" %}',
+                        data: {
+                            videoid: $('#like-button').val(),
+                            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+                            action: 'post'
+                        },
+                        success: function (json) {
+                            document.getElementById("like_count").innerHTML = json['result']
+                        },
+                        error: function (xhr, errmsg, err) {
+
+                        }
+                    });
+                })
+        </script>
     </body>
 
 </html>
