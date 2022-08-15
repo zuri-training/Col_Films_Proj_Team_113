@@ -5,9 +5,10 @@ def home(request):
 
     if request.user.is_authenticated:
         videos = Video.objects.all()
+        categories = Category.objects.all()
 
         template = 'core/home.html'
-        context = {'videos': videos}
+        context = {'videos': videos, 'categories': categories}
         return render(request, template, context)
     else:
         categories = Category.objects.all()
@@ -20,5 +21,13 @@ def tour(request):
     videos = Video.objects.all()
 
     template = 'core/tour.html'
+    context = {'videos': videos}
+    return render(request, template, context)
+
+
+def explore(request):
+    videos = Video.objects.all()
+
+    template = 'core/explore.html'
     context = {'videos': videos}
     return render(request, template, context)

@@ -9,96 +9,7 @@
     <link href="{% static 'styles/bootstrap.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'styles/app.css' %}">
     <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
-    <style>
-    .video-card {
-        padding: 16px;
-        gap: 16px;
-        width: 280px;
-        height: 312px;
-        border: 1px solid #2B333A;
-        border-radius: 8px;
-    }
-    .main-video {
-        width: 248px;
-        height: 184px;
-        border-radius: 8px;
-        z-index: 1;
-    }
-    .video-duration {
-        padding: 8px;
-        position: sticky;
-        float: right;
-        margin-top: -60px;
-        width: 57px;
-        z-index: 99;
-        height: 43px;
-        left: 259px;
-        top: 130px;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 160%;
-        color: #EFF7FA;
-        background: rgba(6, 6, 6, 0.7);
-        border-radius: 8px;
-    }
-    .creator-details {
-        padding: 0px;
-        gap: 8px;
-        width: 134px;
-        height: 20px;
-        font-weight: 400;
-        font-size: 12px;
-        color: #EFF7FA;
-    }
-    .profile-image {
-        width: 20px;
-        height: 20px;
-        border-radius: 240px;
-        transform: matrix(-1, 0, 0, 1, 0, 0);
-    }
-    .main-vid-title {
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 140%;
-        margin-top: 10px;
-        color: #EFF7FA;
-    }
-    .meta-data {
-        display: flex;
-        flex-direction: row;
-        margin-top: 20px;
-        gap: 8px;
-        width: 250px;
-        height: 14px;
-    }
-    .time {
-        padding: 0px;
-        font-size: 10px;
-        color: #EFF7FA;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        height: 14px;
-        margin-right: 10px;
-        gap: 8px;
-    }
-    .details {
-        margin-bottom: 0;
-        margin-top: 0;
-    }
-    .views {
-        padding: 0px;
-        font-size: 10px;
-        color: #EFF7FA;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-right: 10px;
-        gap: 8px;
-        height: 14px;
-    }
-
-    </style>
+    
 </head>
 
 <body>
@@ -160,27 +71,7 @@
 
                 {% for video in videos %}
                 <div class="col-md-3">
-                    <div class="video-card">
-                        <a href="{{ video.get_absolute_url }}">
-                            <video class="main-video" poster="{{ video.thumbnail.url }}" src="" type="video/mp4"></video>
-                        </a>
-                        <div class="video-duration">{{ video.video_length }}</div></a>
-                        <div class="creator-details">
-                            <img class="profile-image" src="{% static 'images/image 22.png' %}" alt="">
-                        </div>
-                        <h5 class="main-vid-title">{{ video.title }}</h5>
-                        <div class="meta-data">
-                            <div class="time"><img src="{% static 'images/Clock.png' %}" alt="">
-                                <p class="details">{{ video.created|naturaltime }}</p>
-                            </div>
-                            <div class="views"><img src="{% static 'images/eye.png' %}" alt="">
-                                <p class="details">{{ video.impressions }} view{{ video.impression|pluralize }}</p>
-                            </div>
-                            <!-- <div class="likes"><img src="{% static 'images/Vector.png' %}" alt="">
-                                <p class="details">1k likes</p>
-                            </div> -->
-                        </div>
-                    </div>
+                    {% include 'partials/_video_card.html' %}
                 </div>
                 {% endfor %}
                 

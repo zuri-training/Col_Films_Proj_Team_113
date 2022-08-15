@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block title %}Explore{% endblock title %}
+
+{% block content %}
+
+{% for video in videos %}
+<div class="col-md-3">
+    {% include 'partials/_video_card.html' %}
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% load static %}
+{% load humanize %}
+
+<div class="main-video-container">
+    <a href="{{ video.get_absolute_url }}">
+        <video class="main-video" poster="{{ video.thumbnail.url }}" src="" type="video/mp4"></video>
+    </a>
+    <div class="video-duration">{{ video.video_length }}</div></a>
+    <!-- <div class="creator-details">
+        <img class="profile-image" src="" alt="">
+    </div> -->
+    <h5 class="main-vid-title">{{ video.title }}</h5>
+    <div class="meta-data">
+        <div class="time"><img src="{% static 'images/Clock.png' %}" alt="">
+            <p class="details">{{ video.created|naturaltime }}</p>
+        </div>
+        <div class="views"><img src="{% static 'images/eye.png' %}" alt="">
+            <p class="details">{{ video.impressions }} view{{ video.impression|pluralize }}</p>
+        </div>
+        <div class="likes"><img src="{% static 'images/Vector.png' %}" alt="">
+            <p class="details">{{ video.favorites }}</p>
+        </div>
+    </div>
+</div>

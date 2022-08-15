@@ -27,15 +27,15 @@
     <nav class="nav">
         <div>
             <div class="text-center text-white">
-                <a href="{% url 'core:home' %}" class="nav_logo active">
+                <a href="{% url 'core:home' %}" class="nav_logo {% url 'core:home' as home_url %}{% if request.get_full_path == home_url %}active{% endif %}">
                     <img src="{% static 'images/favicon.png' %}" alt="">
                 </a> Home
             </div>
             <br>
             <div class="text-center text-white">
-                <a href="{# url 'core:explore' #}" class="nav_logo">
+                <a href="{% url 'core:explore' %}" class="nav_logo {% url 'core:explore' as explore_url %}{% if request.get_full_path == explore_url %}active{% endif %}">
                     <img src="{% static 'images/Explore.png' %}" alt="">
-                </a> Tour
+                </a> Explore
             </div>
             <br>
             <div class="text-center text-white">

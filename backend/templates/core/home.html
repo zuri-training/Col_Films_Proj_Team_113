@@ -1,33 +1,37 @@
 {% extends "core/base.html" %}
-{% load static %}
-{% load humanize %}
 
 {% block title %}Home{% endblock title %}
 
 {% block content %}
+<style>
+    .vidhut__button-primary {
+    background-color: #2B333A;
+    margin-right: 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    padding: 8px 16px;
+    font-family: Montserrat;
+    color: white;
+}
+
+.vidhut__button-primary:hover {
+    background-color: #BCE6AD;
+    color: #000A12;
+}
+</style>
+
+<div class="row mb-3">
+    {% for c in categories %}
+    <div class="col-lg-1 me-2">
+        <a href="{# c.get_absolute_url #}" class="btn vidhut__button-primary mb-1">{{ c.name }}</a>
+    </div>
+    {% endfor %}
+</div>
+
+
 {% for video in videos %}
 <div class="col-md-3">
-    <div class="main-video-container">
-        <a href="{{ video.get_absolute_url }}">
-            <video class="main-video" poster="{{ video.thumbnail.url }}" src="" type="video/mp4"></video>
-        </a>
-        <div class="video-duration">{{ video.video_length }}</div></a>
-        <div class="creator-details">
-            <img class="profile-image" src="{% static 'images/image 22.png' %}" alt="">
-        </div>
-        <h5 class="main-vid-title">{{ video.title }}</h5>
-        <div class="meta-data">
-            <div class="time"><img src="{% static 'images/Clock.png' %}" alt="">
-                <p class="details">{{ video.created|naturaltime }}</p>
-            </div>
-            <div class="views"><img src="{% static 'images/eye.png' %}" alt="">
-                <p class="details">{{ video.impressions }} view{{ video.impression|pluralize }}</p>
-            </div>
-            <!-- <div class="likes"><img src="{% static 'images/Vector.png' %}" alt="">
-                <p class="details">1k likes</p>
-            </div> -->
-        </div>
-    </div>
+    {% include 'partials/_video_card.html' %}
 </div>
 {% endfor %}
 {% endblock %}

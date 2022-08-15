@@ -16,10 +16,10 @@ User = get_user_model()
 
 
 class CreatorSignUpForm(UserCreationForm):
-
+    document = forms.ImageField(required=True)
     class Meta:
         model = User 
-        fields = ['email', 'password1', 'password2']
+        fields = ['email', 'password1', 'password2', 'document']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
