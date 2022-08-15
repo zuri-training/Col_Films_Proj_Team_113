@@ -8,14 +8,12 @@
 
     {% if creator %}
         <h2>Become A Creator</h2>
-        <p class="py-2 mb-3">Get started and upload your videos in the hut.</p>
     {% else %}
         <h2>Join our platform</h2>
-        <p class="py-2 mb-3">Watch endless hours of movies by creators.</p>
     {% endif %}
 
-    <form method="post" action="" class="needs-validation">
-
+    <form method="post" action="" class="needs-validation" {% if creator %}enctype="multipart/form-data"{% endif %}>
+        
         {% csrf_token %}
         {% include 'partials/_form_errors.html' %}
 
@@ -56,6 +54,14 @@
             {% endfor %}
         </div>
 
+        {% if creator %}
+            <div class="mb-3">
+                <label for="id_document" class="form-label">Document:</label>
+                <img src="" alt="" id="output" class="img-fluid">
+                <input class="form-control" type="file" name="document" accept="image/*" required id="id_document" onchange="loadFile(event)">
+            </div>
+        {% endif %}
+
         <div class="mb-3">
             <button type="submit" class="btn button-primary">Register</button>
         </div>
@@ -63,5 +69,12 @@
         <p>Already have an account? <a href="{% url 'accounts:login' %}" class="text-info">Login</a></a></p>
     </form>
 </div>
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
 
 {% endblock content %}

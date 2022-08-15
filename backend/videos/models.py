@@ -78,7 +78,7 @@ class Video(models.Model):
     thumbnail = models.ImageField(verbose_name=_('thumbnail'),
                                   upload_to='thumbnails',
                                   validators=[FileExtensionValidator(
-                                    ["jpg", "jpeg", "png", "webp"])],
+                                    ['jpg', 'jpeg', 'png', 'webp'])],
                                   help_text=_('An image that will be used as a thumbnail.'))
     description = models.TextField(verbose_name=_('description'),
                                    max_length=1000,
@@ -108,12 +108,12 @@ class Video(models.Model):
     updated = models.DateTimeField(verbose_name=_('updated'),
                                    auto_now=True,
                                    help_text=_('The date/time when the user made changes to the video information'))
-    likes = models.ManyToManyField(settings.AUTH_USER_MODEL,
-                                       related_name=_('likes'),
-                                       verbose_name=_('user likes'),
+    favorites = models.BigIntegerField(default=0)
+    users_favorites = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                       related_name=_('videos_favorites'),
+                                       verbose_name=_('users favorites'),
                                        blank=True,
-                                       help_text=_('Users who added video to their likes.'))
-    like_count = models.BigIntegerField(default=0)
+                                       help_text=_('Users who added video to their favorites.'))
     video_length = models.CharField(verbose_name=_('video length'),
                                     max_length=10,
                                     help_text=_('Length of the video in minutes:seconds'),

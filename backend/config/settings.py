@@ -11,24 +11,15 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config, Csv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = config('SECRET_KEY')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lx1zr^*2%kh_9lbye#h6681@6(i3r4z8rv_z1y3vce&a16+a+@'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
-
-# Application definition
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,7 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'accounts',
     'core',
-    'videos',
+    'videos.apps.VideosConfig',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_cleanup.apps.CleanupConfig',
@@ -140,7 +131,18 @@ LOGOUT_REDIRECT_URL = 'core:home'
 
 AUTH_USER_MODEL = 'accounts.User'
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+
+EMAIL_HOST = config('EMAIL_HOST', default='localhost')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+
+SERVER_EMAIL = config('SERVER_EMAIL', default='noreply@vidhut.com')
+DEFAULT_FROM_EMAIL = 'Vidhut <noreply@footystory.com>'
+EMAIL_SUBJECT_PREFIX = '[Vidhut] '
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 

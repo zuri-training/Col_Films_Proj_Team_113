@@ -4,31 +4,11 @@ from core.utils import mk_paginator
 from django.utils.text import slugify
 from django.contrib import messages
 from moviepy.editor import VideoFileClip
-from django.core.files.uploadedfile import UploadedFile
 from .forms import VideoUploadForm, CommentForm
-from django.http import JsonResponse
+from django.http import HttpResponseBadRequest
 from .models import Video, Category
 
 
-# def video_list(request, category_slug=None):
-#     categories = Category.objects.all()
-#     category = None
-#     products = Product.objects.filter(is_available=True)
-#     if category_slug:
-#         category = get_object_or_404(Category, slug=category_slug)
-#         products = category.products.filter(is_available=True)
-#     product_count = products.count()
-#     products = mk_paginator(request, products, 3)
-
-#     template_name = "products/list.html"
-#     context = {
-#         "products": products,
-#         "categories": categories,
-#         "category": category,
-#         "product_count": product_count,
-#     }
-
-#     return render(request, template_name, context)
 
 def format_video_length(seconds):
     hours = seconds // 3600
@@ -88,44 +68,6 @@ def video_create(request):
     return render(request, template, context)
 
 
-# def product_update(request, id):
-#     """ View to enable a Vendor update a product. """
-#     product = get_object_or_404(Product, id=id, vendor=request.user)
-#     if request.method == 'POST':
-#         form = ProductForm(request.POST, request.FILES, instance=product)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(
-#                 request, "Your product has been successfully updated.")
-#             return redirect(product)
-#     else:
-#         form = ProductForm(instance=product)
-
-#     template_name = "products/form.html"
-#     context = {
-#         'form': form,
-#     }
-
-#     return render(request, template_name, context)
-
-
-# def product_delete(request, id):
-#     # Use a Modal instead?
-#     product = get_object_or_404(Product, id=id, vendor=request.user)
-#     if request.method == 'POST':
-#         product.delete()
-#         messages.success(
-#             request, "Your product has been deleted.")
-#         return redirect(product)
-
-#     template_name = "products/delete.html"
-#     context = {
-#         'product': product,
-#     }
-
-#     return render(request, template_name, context)
-
-
 @login_required
 def video_detail(request, slug):
     """
@@ -178,20 +120,32 @@ def video_detail(request, slug):
 
 
 @login_required
-def like(request):
-    if request.POST.get('action') == 'post':
-        result = ''
-        id = int(request.POST.get('videoid'))
-        video = get_object_or_404(Video, id=id)
-        if video.likes.filter(id=request.user.id).exists():
-            video.likes.remove(request.user)
-            video.like_count -= 1
-            result = video.like_count
-            video.save()
-        else:
-            video.likes.add(request.user)
-            video.like_count += 1
-            result = video.like_count
-            video.save()
+def video_favorite(request, id):
+    video = get_object_or_404(Video, id=id)
+    current_url = request.META['HTTP_REFERER']
+    users_favorites = video.users_favorites.filter(
+        email=request.user.email)
+    if not users_favorites:
+        video.favorites += 1
+        video.users_favorites.add(request.user)
+        messages.success(
+            request, "This video has been added to your favorites.")
+        return redirect(current_url)
+    else:
+        return HttpResponseBadRequest()
 
-        return JsonResponse({'result': result, })
+
+@login_required
+def video_unfavorite(request, id):
+    video = get_object_or_404(Video, id=id)
+    current_url = request.META['HTTP_REFERER']
+    users_favorites = video.users_favorites.filter(
+        email=request.user.email)
+    if users_favorites:
+        video.favorites -= 1
+        video.users_favorites.remove(request.user)
+        messages.success(
+            request, "This video has been deleted from your favorites.")
+        return redirect(current_url)
+    else:
+        return HttpResponseBadRequest()

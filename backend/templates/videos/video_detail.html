@@ -11,6 +11,9 @@
     <link rel="shortcut icon" href="{% static 'images/Group 1.png' %}" type="image/x-icon">
     <link href="https://unpkg.com/video.js@7/dist/video-js.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Vidhut</title>
     <style>
         :root {
@@ -41,7 +44,8 @@
         <!--Container Main start-->
         <div class="container col-md-12">
             <div class="main-video-container">
-                <h4 class="video-header">{{ video.user }}</h4>
+                {% include "partials/_alerts.html" %}
+                <h4 class="video-header">By: {{ video.user }}</h4>
                 <!-- <video controls id="video" class="video" preload="metadata" poster="{{ video.thumbnail.url }}">
                     <source src="{{ video.video_file.url }}" type="video/mp4">
                     </source>
@@ -77,12 +81,28 @@
                     <div id="views">
                         <p>{{ video.impressions }} view{{ video.impressions|pluralize }}</p>
                     </div>
-                    <div id="vide0-upload-date">
+                    <div id="video-upload-date">
                         <p>{{ video.created|date:"d M Y" }}</p>
                     </div>
                     <p class="description">{{ video.description }}</p>
-                    <span class="" id="like_count">{{ video.like_count }}</span>
-                    <button class="btn btn-link text-dark p-0 border-0 btn-outline-light" id="like-button" value="{{ video.id }}">Like</button>
+                    
+                    {% if request.user.is_authenticated %}
+                    
+                        <div class="likes">
+                            {% if not video.user == request.user %}
+                                {% if request.user in video.users_favorites.all %}
+                                    <a href="{% url 'videos:unfavorite' video.id %}" title="Unfavorite this" rel="nofollow">
+                                        <span class="fa fa-heart" style="color: #21bb9d;"></span>
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'videos:favorite' video.id %}" title="Favorite this" rel="nofollow">
+                                        <span class="fa fa-heart-o"></span>
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                            <span class="ms-2">{{ video.favorites }}</span>
+                        </div>
+                    {% endif %}
                     <!-- <div class="follow"><a class="follow" href="#follow">Follow</a> </div> -->
 
                 </div>
@@ -90,7 +110,6 @@
                 <div class="comment-section">
                     <form action="" method="post">
                         {% csrf_token %}
-                        {# comment_form.as_p #}
                         <input class="comment" type="text" placeholder="Add a comment" name="body" required id="id_body">
                         <button type="submit" id="send"><img src="{% static 'images/send.png' %}" alt=""></button>
                     </form>
@@ -102,7 +121,7 @@
                         {% for comment in comments %}
                         <div class="d-flex mb-3">
                             <div class="flex-shrink-0 circle">
-                                <span class="initials">MS</span>
+                                <span class="initials">{{ comment.user|make_list|first|title }}</span>
                             </div>
                             <div class="flex-grow-1 ms-3 mt-3 text-white">
                                 {{ comment.body }}
@@ -120,26 +139,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
             crossorigin="anonymous"></script>
-        <script>
-            $(document).on('click', '#like-button', function (e) {
-                    e.preventDefault();
-                    $.ajax({
-                        type: 'POST',
-                        url: '{% url "videos:like" %}',
-                        data: {
-                            videoid: $('#like-button').val(),
-                            csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-                            action: 'post'
-                        },
-                        success: function (json) {
-                            document.getElementById("like_count").innerHTML = json['result']
-                        },
-                        error: function (xhr, errmsg, err) {
-
-                        }
-                    });
-                })
-        </script>
     </body>
 
 </html>

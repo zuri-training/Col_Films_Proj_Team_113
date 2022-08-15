@@ -33,7 +33,7 @@ def creator_signup(request):
         return redirect('core:home')
     
     if request.method == 'POST':
-        form = CreatorSignUpForm(request.POST)
+        form = CreatorSignUpForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False

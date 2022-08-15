@@ -6,6 +6,12 @@ app_name = 'videos'
 
 urlpatterns = [
     path('create/', views.video_create, name='create'),
-    path('like/', views.like, name='like'),
+    path('<int:id>/favorite/',
+		views.video_favorite,
+		name='favorite'),
+
+	path('<int:id>/unfavorite/',
+		views.video_unfavorite,
+		name='unfavorite'),
     path('<slug:slug>/', views.video_detail, name='detail'),
 ]

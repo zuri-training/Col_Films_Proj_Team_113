@@ -18,6 +18,8 @@ class User(AbstractUser):
                               unique=True)
     email_verified = models.BooleanField(default=False)
 
+    document = models.ImageField(upload_to='documents', blank=True)
+
     is_viewer = models.BooleanField(default=False)
     is_creator = models.BooleanField(default=False)
 

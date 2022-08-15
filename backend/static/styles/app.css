@@ -395,8 +395,7 @@ footer img {
 }
 
 /* Video card */
-.main-video-container,
-.container {
+.main-video-container {
     justify-self: center;
     justify-content: center;
     width: 320px;
